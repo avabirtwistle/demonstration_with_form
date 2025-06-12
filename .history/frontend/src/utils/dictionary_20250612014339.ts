@@ -44,7 +44,7 @@ const d = {
   contactInformation: "Contact Information",
   submit: "Submit",
   form: "Form",
-  plantInfo: "Plant Info",
+  plantInfo: "Tray Info",
   history: "History",
   additionalInfo: "Additional Info",
   review: "Review",
@@ -68,14 +68,12 @@ const d = {
   uploadZIP: "Upload ZIP",
   portfolio: "Portfolio",
   resume: "Resume",
-  newPlant: "Start New Plant",
+  newPlant: "New Plant",
   dashboard: "Dashboard",
   system: "System",
   dark: "Dark",
   light: "Light",
-  trayRegistry: "New Tray",
+  trayRegistry: "Tray Registry",
   qrCode: "QR Code",
-  scanQR: "Scan Tray QR Codes",
-  addTray: "Add Trays to This Batch"
 }
 export { d };

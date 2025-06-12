@@ -68,7 +68,7 @@ const d = {
   uploadZIP: "Upload ZIP",
   portfolio: "Portfolio",
   resume: "Resume",
-  newPlant: "Start New Plant",
+  newPlant: "New Plant",
   dashboard: "Dashboard",
   system: "System",
   dark: "Dark",

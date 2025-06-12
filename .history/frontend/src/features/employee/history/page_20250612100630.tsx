@@ -109,7 +109,7 @@ const Provider = ({ readOnly }: ProviderProps) => {
       defaultValues={defaultValues}
       onSubmit={handleSubmit}
       readOnly={readOnly}
-      title={d.addTray}
+      title={d.history}
     >
       {/* Render the actual form fields defined in the Page component above */}
       <Page />

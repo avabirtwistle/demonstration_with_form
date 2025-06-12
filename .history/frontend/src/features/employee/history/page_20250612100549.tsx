@@ -9,8 +9,22 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 // It sets up schema-based validation (likely using Zod or Yup), handles submission, and provides layout.
 import { Form } from "@/features/form/components/form";
 
+// This is a text input field (like <input> or <textarea>) that's wired into react-hook-form.
+import { TextField } from "@/features/form/components/controllers/text-field";
+
+// This is a modular section of the form specifically for collecting information about schools/education.
+import { EducationalInstitutions } from "@/features/employee/history/components/educational-institutions";
+
 // This is a modular section for entering prior employment history, likely a repeatable component.
 import { EmployeeHistory } from "@/features/employee/history/components/previous-employers";
+
+// These are custom hooks that fetch form options from an API or static source — like dropdown lists.
+// Each hook returns data like degrees, employment status types, and reasons for leaving previous jobs.
+import {
+  useDegrees,
+  useEmploymentStatuses,
+  useReasonsForLeaving,
+} from "@/features/employee/history/hooks/useQueries";
 
 // This hook accesses shared state that lives outside of just this form — probably a global state store.
 // It lets you load the current form data and update it across steps.
@@ -109,7 +123,7 @@ const Provider = ({ readOnly }: ProviderProps) => {
       defaultValues={defaultValues}
       onSubmit={handleSubmit}
       readOnly={readOnly}
-      title={d.addTray}
+      title={d.history}
     >
       {/* Render the actual form fields defined in the Page component above */}
       <Page />
