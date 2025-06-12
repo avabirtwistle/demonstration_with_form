@@ -1,7 +1,5 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response
 from flask_cors import CORS
-from src.model.getFreeSpace import get_free_locations
-
 import time
 
 app = Flask(__name__)
@@ -35,14 +33,6 @@ def stream():
                 yield f"data: {_last_qr}\n\n"
                 last_sent = _last_qr
     return Response(event_stream(), mimetype="text/event-stream")
-
-@app.route("/api/free-locations")
-def get_free_locations():
-    result = get_free_locations()
-    if result:
-        return jsonify(result)
-    else:
-        return jsonify({"error": "No free locations"})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

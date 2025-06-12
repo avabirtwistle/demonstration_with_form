@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response
 from flask_cors import CORS
 from src.model.getFreeSpace import get_free_locations
 
@@ -38,11 +38,9 @@ def stream():
 
 @app.route("/api/free-locations")
 def get_free_locations():
-    result = get_free_locations()
-    if result:
-        return jsonify(result)
-    else:
-        return jsonify({"error": "No free locations"})
+    from your_model_module import find_free_locations  # replace with actual filename
+    free_locations = find_free_locations()
+    return jsonify(free_locations)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
