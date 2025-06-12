@@ -9,6 +9,12 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 // It sets up schema-based validation (likely using Zod or Yup), handles submission, and provides layout.
 import { Form } from "@/features/form/components/form";
 
+// This is a text input field (like <input> or <textarea>) that's wired into react-hook-form.
+import { TextField } from "@/features/form/components/controllers/text-field";
+
+// This is a modular section of the form specifically for collecting information about schools/education.
+import { EducationalInstitutions } from "@/features/employee/history/components/educational-institutions";
+
 // This is a modular section for entering prior employment history, likely a repeatable component.
 import { EmployeeHistory } from "@/features/employee/history/components/previous-employers";
 
@@ -109,7 +115,7 @@ const Provider = ({ readOnly }: ProviderProps) => {
       defaultValues={defaultValues}
       onSubmit={handleSubmit}
       readOnly={readOnly}
-      title={d.addTray}
+      title={d.history}
     >
       {/* Render the actual form fields defined in the Page component above */}
       <Page />

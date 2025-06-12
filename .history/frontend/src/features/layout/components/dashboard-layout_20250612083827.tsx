@@ -2,7 +2,7 @@ import { ThemeToggle } from "@/features/layout/components/theme-toggle";
 import { useStore } from "@/features/layout/hooks/useStore";
 import { DRAWER_WIDTH } from "@/features/layout/utils/constants";
 import { d } from "@/utils/dictionary";
-import SpaIcon from "@mui/icons-material/Spa";
+import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Container, Paper, Stack } from "@mui/material";
@@ -112,7 +112,7 @@ const DashboardLayout = () => {
           <ListItem disablePadding>
             <ListItemButton href="/employee/personal-info">
               <ListItemIcon>
-                <SpaIcon />
+                <BadgeOutlinedIcon />
               </ListItemIcon>
               <ListItemText primary={d.newPlant} />
             </ListItemButton>

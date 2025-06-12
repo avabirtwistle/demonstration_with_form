@@ -9,8 +9,22 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 // It sets up schema-based validation (likely using Zod or Yup), handles submission, and provides layout.
 import { Form } from "@/features/form/components/form";
 
+// This is a text input field (like <input> or <textarea>) that's wired into react-hook-form.
+import { TextField } from "@/features/form/components/controllers/text-field";
+
+// This is a modular section of the form specifically for collecting information about schools/education.
+import { EducationalInstitutions } from "@/features/employee/history/components/educational-institutions";
+
 // This is a modular section for entering prior employment history, likely a repeatable component.
 import { EmployeeHistory } from "@/features/employee/history/components/previous-employers";
+
+// These are custom hooks that fetch form options from an API or static source — like dropdown lists.
+// Each hook returns data like degrees, employment status types, and reasons for leaving previous jobs.
+import {
+  useDegrees,
+  useEmploymentStatuses,
+  useReasonsForLeaving,
+} from "@/features/employee/history/hooks/useQueries";
 
 // This hook accesses shared state that lives outside of just this form — probably a global state store.
 // It lets you load the current form data and update it across steps.
@@ -23,6 +37,7 @@ import { useStore } from "@/features/employee/history/hooks/useStore";
 // - `ReasonForLeavingEnum`: Enum for constants like "Other", "Fired", etc.
 import {
   defaultValues,
+  ReasonForLeavingEnum,
   schema,
   Schema,
 } from "@/features/employee/history/types/schema";
@@ -49,12 +64,78 @@ import { useFormContext } from "@/features/form/hooks/useFormContext";
 // This component defines the actual fields shown inside the form UI.
 // It does NOT handle submission or validation — it simply renders form inputs in a layout.
 const Page = () => {
+  // These three custom hooks return dropdown options.
+  // Example: useEmploymentStatuses might return ["Employed", "Unemployed", "Student"]
+  const employmentStatusesQuery = useEmploymentStatuses();
+  const reasonsForLeavingQuery = useReasonsForLeaving();
+  const degreesQuery = useDegrees();
+
   // Destructure the `control` object from the form context.
   // This is necessary to bind form inputs to react-hook-form.
   const { control } = useFormContext<Schema>();
 
+  // useWatch tracks the value of a specific form field in real time.
+  // We're watching "reasonsForLeavingPreviousJobs" so we can show/hide a text input dynamically.
+  const reasonsForLeavingPreviousJobs = useWatch({
+    control,
+    name: "reasonsForLeavingPreviousJobs",
+  });
+
   return (
     <>
+      {/* 
+        This grid item takes up 6 of 12 columns (i.e., 50% width).
+        It holds the autocomplete input for current employment status.
+      */}
+      <Grid size={{ xs: 6 }}>
+        <Autocomplete<Schema>
+          name="currentEmploymentStatus"
+          options={employmentStatusesQuery.data}
+          textFieldProps={{ label: d.currentEmploymentStatus }}
+        />
+      </Grid>
+
+      {/* 
+        This grid item is also 50% wide.
+        It holds the autocomplete input for highest degree obtained.
+      */}
+      <Grid size={{ xs: 6 }}>
+        <Autocomplete<Schema>
+          name="highestDegreeObtained"
+          options={degreesQuery.data}
+          textFieldProps={{ label: d.highestDegreeObtained }}
+        />
+      </Grid>
+
+      {/* 
+        Multi-select field for reasons for leaving jobs.
+        This lets users choose multiple reasons (e.g., "Burnout", "Relocation", etc.)
+      */}
+      <Grid size={{ xs: 6 }}>
+        <Autocomplete<Schema, true>
+          name="reasonsForLeavingPreviousJobs"
+          options={reasonsForLeavingQuery.data}
+          textFieldProps={{ label: d.reasonsForLeavingPreviousJobs }}
+          multiple={true}
+        />
+      </Grid>
+
+      {/* 
+        Conditionally render a multiline text input if the user selected "Other".
+        This uses the watched value from above to determine whether to show the field.
+      */}
+      <Grid size={{ xs: 6 }}>
+        {reasonsForLeavingPreviousJobs.includes(
+          ReasonForLeavingEnum.enum.OTHER
+        ) && (
+          <TextField<Schema>
+            name="otherReasonsForLeaving"
+            label={d.otherReasonsForLeaving}
+            multiline
+            maxRows={4}
+          />
+        )}
+      </Grid>
 
       {/* 
         These are subcomponents that render sections for:
@@ -63,6 +144,7 @@ const Page = () => {
         Each is self-contained and uses form state behind the scenes.
       */}
       <EmployeeHistory />
+      <EducationalInstitutions />
     </>
   );
 };
@@ -109,7 +191,7 @@ const Provider = ({ readOnly }: ProviderProps) => {
       defaultValues={defaultValues}
       onSubmit={handleSubmit}
       readOnly={readOnly}
-      title={d.addTray}
+      title={d.history}
     >
       {/* Render the actual form fields defined in the Page component above */}
       <Page />

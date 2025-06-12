@@ -57,7 +57,7 @@ const Stepper = () => {
     },
     {
       href: "/employee/history",
-      label: d.scanQR,
+      label: d.history,
       success: employeeHistorySuccess,
     },
     {
