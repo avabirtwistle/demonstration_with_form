@@ -10,8 +10,8 @@ export type ProficiencyData = {
 export async function getProficiencyLevels(): Promise<ProficiencyData> {
   await wait(1000);
   return {
-    projectManagement: "02",
-    communication:     "02",
-    technicalSkills:   "03",
+    projectManagement: "Rack",
+    communication:     "Level",
+    technicalSkills:   "Slot Index",
   };
 }

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { ApiCoreCompetencyEnum } from "@/features/employee/skills/types/apiTypes";
+import { wait } from "@/utils/wait";
 /**
  * Native Zod enum for core competencies (unused here but exported for consistency)
  */
@@ -24,10 +25,10 @@ type Schema = z.infer<typeof schema>;
 /**
  * Default values matching the schema structure.
  */
-
 const defaultValues: Schema = {
   proficiencyLevels: {
-    projectManagement: "",
+    wait()
+    projectManagement: "me",
     communication:     "",
     technicalSkills:   "",
   },

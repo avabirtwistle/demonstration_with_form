@@ -1,14 +1,15 @@
 import { z } from "zod";
 import { ApiCoreCompetencyEnum } from "@/features/employee/skills/types/apiTypes";
+
 /**
  * Native Zod enum for core competencies (unused here but exported for consistency)
  */
-const CoreCompetencyEnum = z.nativeEnum(ApiCoreCompetencyEnum);
+export const CoreCompetencyEnum = z.nativeEnum(ApiCoreCompetencyEnum);
 
 /**
  * Zod schema for the proficiencyLevels section only.
  */
-const schema = z.object({
+export const schema = z.object({
   proficiencyLevels: z.object({
     projectManagement: z.string().min(1),
     communication:     z.string().min(1),
@@ -19,13 +20,12 @@ const schema = z.object({
 /**
  * Inferred TypeScript type for the schema.
  */
-type Schema = z.infer<typeof schema>;
+export type Schema = z.infer<typeof schema>;
 
 /**
  * Default values matching the schema structure.
  */
-
-const defaultValues: Schema = {
+export const defaultValues: Schema = {
   proficiencyLevels: {
     projectManagement: "",
     communication:     "",

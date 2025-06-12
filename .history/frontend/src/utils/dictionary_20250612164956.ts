@@ -77,6 +77,6 @@ const d = {
   qrCode: "QR Code",
   scanQR: "Scan Tray QR Codes",
   addTray: "Add Trays to This Batch",
-  generateLocation: "Find Free Location"
+  generateLocation: "Location Generated"
 }
 export { d };

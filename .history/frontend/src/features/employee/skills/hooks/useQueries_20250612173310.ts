@@ -11,5 +11,10 @@ const useProficiencyLevels = () => {
 };
 
 export {
+  //useCoreCompetencies,
   useProficiencyLevels,
+  //useSkillCategories,
+  //useSkills,
+  //useSkillSubcategories,
+  //useLanguages,
 };
