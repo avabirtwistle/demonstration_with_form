@@ -29,7 +29,7 @@ const EmployeeSkills = ({ readOnly }: ProviderProps) => {
 
   return (
     <Form<Schema>
-      title={d.location}
+      title={d.skills}
       schema={schema}
       defaultValues={defaultValues}
       values={formData}

@@ -43,6 +43,8 @@ const defaultValues: Schema = {
   languagesSpoken: [],
   proficiencyLevels: {
     communication: "",
+    leadership: "",
+    problemSolving: "",
     projectManagement: "",
     technicalSkills: "",
   },

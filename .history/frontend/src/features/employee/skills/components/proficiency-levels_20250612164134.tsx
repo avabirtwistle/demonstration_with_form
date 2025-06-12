@@ -12,6 +12,8 @@ const FIELDS: Array<keyof Schema["proficiencyLevels"]> = [
   "projectManagement",
   "communication",
   "technicalSkills",
+  "leadership",
+  "problemSolving",
 ];
 
 export const ProficiencyLevels = () => {

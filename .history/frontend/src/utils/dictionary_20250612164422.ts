@@ -24,7 +24,7 @@ const d = {
   languagesSpoken: "Languages Spoken",
   projectManagement: "Rack",
   communication: "Level",
-  technicalSkills: "Slot Index",
+  technicalSkills: "Technical Skills",
   leadership: "Leadership",
   problemSolving: "Problem Solving",
   proficiencyLevels: "Proficiency Levels",

@@ -12,6 +12,8 @@ const FIELDS: Array<keyof Schema["proficiencyLevels"]> = [
   "projectManagement",
   "communication",
   "technicalSkills",
+  "leadership",
+  "problemSolving",
 ];
 
 export const ProficiencyLevels = () => {
@@ -33,6 +35,7 @@ export const ProficiencyLevels = () => {
       <Grid container spacing={1} alignItems="center" sx={{ mb: 1 }}>
         <Grid xs={12}>
           <Typography variant="subtitle1">
+            {" "}
             {isLoading && <CircularProgress size={14} />}
             {isError && "  (Failed to load)"}
           </Typography>
