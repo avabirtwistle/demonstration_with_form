@@ -3,7 +3,7 @@ import { Form } from "@/features/form/components/form";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { Autocomplete } from "@/features/form/components/controllers/autocomplete";
 import { TextField } from "@/features/form/components/controllers/text-field";
-import { ProficiencyLevels } from "@/features/employee/skills/components/proficiency-levels";
+import { ProficiencyLevels } from "@/features/employee/skills/components/location-fields";
 import { SkillSets } from "@/features/employee/skills/components/skill-sets";
 import {
   useCoreCompetencies,

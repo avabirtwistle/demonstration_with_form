@@ -1,6 +1,6 @@
 import { Form } from "@/features/form/components/form";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { ProficiencyLevels } from "@/features/employee/skills/components/proficiency-levels";
+import { ProficiencyLevels } from "@/features/employee/skills/components/location-fields";
 import { useStore } from "@/features/employee/skills/hooks/useStore";
 import { defaultValues, schema, Schema } from "@/features/employee/skills/types/schema";
 import { d } from "@/utils/dictionary";

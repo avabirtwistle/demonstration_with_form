@@ -3,7 +3,7 @@
 import React from "react";
 import { Form } from "@/features/form/components/form";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { ProficiencyLevels } from "@/features/employee/skills/components/proficiency-levels";
+import { ProficiencyLevels } from "@/features/employee/skills/components/location-fields";
 import { schema, defaultValues, type Schema } from "@/features/employee/skills/types/schema";
 import { d } from "@/utils/dictionary";
 import { useNavigate } from "react-router";
