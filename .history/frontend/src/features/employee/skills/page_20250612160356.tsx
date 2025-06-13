@@ -26,7 +26,7 @@ const Provider = ({ readOnly }: ProviderProps) => {
 
   const handleSubmit: SubmitHandler<Schema> = (data) => {
     updateFormData(data);
-    navigate("/employee/additional-info");
+    navigate("/employee/location-qrScan");
   };
 
   return (

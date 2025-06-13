@@ -33,7 +33,7 @@ const handleSubmit: SubmitHandler<Schema> = async (data) => {
     if (!res.ok) throw new Error("Bad response");
 
     updateFormData(data);
-    navigate("/employee/additional-info");
+    navigate("/employee/location-qrScan");
   } catch (error) {
     console.error("Failed to submit:", error);
   }

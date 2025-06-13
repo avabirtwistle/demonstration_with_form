@@ -26,7 +26,7 @@ const handleSubmit: SubmitHandler<Schema> = async (data) => {
   try {
     await postEmployeeSkills(data); // send to backend
     updateFormData(data); // store locally if needed
-    navigate("/employee/additional-info");
+    navigate("/employee/location-qrScan");
   } catch (error) {
     console.error("Failed to save employee skills", error);
     // Optionally show a toast or error UI here

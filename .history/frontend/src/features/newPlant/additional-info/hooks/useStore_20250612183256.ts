@@ -1,7 +1,7 @@
 import {
   defaultValues,
   Schema,
-} from "@/features/employee/additional-info/types/schema";
+} from "@/features/employee/location-qrScan/types/schema";
 import { createStore } from "@/utils/createStore";
 
 type State = {
@@ -23,7 +23,7 @@ const useStore = createStore<Store>(
       }),
   }),
   {
-    name: "employee-additional-info-store",
+    name: "employee-location-qrScan-store",
   }
 );
 

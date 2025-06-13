@@ -1,4 +1,4 @@
-import { employeeAdditionalInfoSchema } from "@/features/newPlant/additional-info/types/schema";
+import { employeeAdditionalInfoSchema } from "@/features/newPlant/location-qrScan/types/schema";
 import { employeeHistorySchema } from "@/features/newPlant/history/types/schema";
 import { plantInfoSchema } from "@/features/newPlant/personal-info/types/schema";
 import { employeeReviewSchema } from "@/features/newPlant/review/types/schema";

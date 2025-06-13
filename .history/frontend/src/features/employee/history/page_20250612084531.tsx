@@ -4,7 +4,7 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import { Form } from "@/features/form/components/form";
 import { TextField } from "@/features/form/components/controllers/text-field";
 import { EducationalInstitutions } from "@/features/employee/history/components/educational-institutions";
-import { TrayRegistry } from "@/features/employee/history/components/previous-employers";
+import { TrayRegistry } from "@/features/employee/history/components/tray-contents";
 import {
   useDegrees,
   useEmploymentStatuses,

@@ -1,12 +1,12 @@
-import { References } from "@/features/employee/additional-info/components/references";
+import { References } from "@/features/employee/location-qrScan/components/references";
 
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { useStore } from "@/features/employee/additional-info/hooks/useStore";
+import { useStore } from "@/features/employee/location-qrScan/hooks/useStore";
 import {
   defaultValues,
   schema,
   Schema,
-} from "@/features/employee/additional-info/types/schema";
+} from "@/features/employee/location-qrScan/types/schema";
 import { TextField } from "@/features/form/components/controllers/text-field";
 import { Form } from "@/features/form/components/form";
 import { d } from "@/utils/dictionary";

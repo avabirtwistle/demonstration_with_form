@@ -1,4 +1,4 @@
-// src/features/employee/additional-info/types/schema.ts
+// src/features/employee/location-qrScan/types/schema.ts
 import { z } from "zod";
 import { regex } from "@/utils/regex";
 

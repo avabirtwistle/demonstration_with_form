@@ -1,4 +1,4 @@
-import { EmployeeAdditionalInfo } from "@/features/newPlant/additional-info/page";
+import { EmployeeAdditionalInfo } from "@/features/newPlant/location-qrScan/page";
 import { TrayQR } from "@/features/newPlant/history/page";
 import { PlantInfo } from "@/features/newPlant/personal-info/page";
 import { EmployeeReview } from "@/features/newPlant/review/page";
@@ -20,7 +20,7 @@ const RoutesWrapper = () => {
             <Route path="/newPlant/history" element={<TrayQR />} />
             <Route path="/newPlant/skills" element={<EmployeeSkills />} />
             <Route
-              path="/newPlant/additional-info"
+              path="/newPlant/location-qrScan"
               element={<EmployeeAdditionalInfo />}
             />
             <Route path="/newPlant/review" element={<EmployeeReview />} />

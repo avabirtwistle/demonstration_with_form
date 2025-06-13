@@ -1,5 +1,5 @@
-// src/features/employee/additional-info/hooks/useStore.ts
-import { defaultValues, Schema } from "@/features/employee/additional-info/types/schema";
+// src/features/employee/location-qrScan/hooks/useStore.ts
+import { defaultValues, Schema } from "@/features/employee/location-qrScan/types/schema";
 import { createStore } from "@/utils/createStore";
 
 type State = { formData: Schema };
@@ -11,6 +11,6 @@ type Store = State & Actions;
 const useStore = createStore<Store>((set) => ({
   formData: defaultValues,
   updateFormData: (data) => set((state) => { state.formData = data; }),
-}), { name: "employee-additional-info-store" });
+}), { name: "employee-location-qrScan-store" });
 
 export { useStore };

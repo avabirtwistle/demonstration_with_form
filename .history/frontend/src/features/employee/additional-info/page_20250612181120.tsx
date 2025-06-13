@@ -1,6 +1,6 @@
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { useStore } from "@/features/employee/additional-info/hooks/useStore";
-import { defaultValues, schema, type Schema } from "@/features/employee/additional-info/types/schema";
+import { useStore } from "@/features/employee/location-qrScan/hooks/useStore";
+import { defaultValues, schema, type Schema } from "@/features/employee/location-qrScan/types/schema";
 import { Form } from "@/features/form/components/form";
 import { useFormContext } from "@/features/form/hooks/useFormContext";
 import { TextField } from "@/features/form/components/controllers/text-field";

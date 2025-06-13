@@ -22,7 +22,7 @@ const Provider = ({ readOnly }: ProviderProps) => {
 
   const handleSubmit = (data: Schema) => {
     updateFormData(data)
-    navigate("/employee/additional-info")
+    navigate("/employee/location-qrScan")
   }
 
   return (

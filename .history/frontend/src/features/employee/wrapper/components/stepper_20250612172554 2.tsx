@@ -1,5 +1,5 @@
-import { useEmployeeAdditionalInfoStore } from "@/features/employee/additional-info/hooks/useStore";
-import { employeeAdditionalInfoSchema } from "@/features/employee/additional-info/types/schema";
+import { useEmployeeAdditionalInfoStore } from "@/features/employee/location-qrScan/hooks/useStore";
+import { employeeAdditionalInfoSchema } from "@/features/employee/location-qrScan/types/schema";
 import { useEmployeeHistoryStore } from "@/features/employee/history/hooks/useStore";
 import { employeeHistorySchema } from "@/features/employee/history/types/schema";
 import { usePlantInfoStore } from "@/features/employee/personal-info/hooks/useStore";
@@ -66,7 +66,7 @@ const Stepper = () => {
       success: employeeSkillsSuccess,
     },
     {
-      href: "/employee/additional-info",
+      href: "/employee/location-qrScan",
       label: d.additionalInfo,
       success: employeeAdditionalInfoSuccess,
     },

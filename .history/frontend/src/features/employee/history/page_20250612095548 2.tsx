@@ -16,7 +16,7 @@ import { TextField } from "@/features/form/components/controllers/text-field";
 import { EducationalInstitutions } from "@/features/employee/history/components/educational-institutions";
 
 // This is a modular section for entering prior employment history, likely a repeatable component.
-import { EmployeeHistory } from "@/features/employee/history/components/previous-employers";
+import { EmployeeHistory } from "@/features/employee/history/components/tray-contents";
 
 // These are custom hooks that fetch form options from an API or static source — like dropdown lists.
 // Each hook returns data like degrees, employment status types, and reasons for leaving previous jobs.

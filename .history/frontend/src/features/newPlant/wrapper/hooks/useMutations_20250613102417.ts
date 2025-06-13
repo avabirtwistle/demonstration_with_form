@@ -1,4 +1,4 @@
-import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/additional-info/hooks/useStore";
+import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrScan/hooks/useStore";
 import { useEmployeeHistoryStore } from "@/features/newPlant/history/hooks/useStore";
 import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";
 import { useEmployeeReviewStore } from "@/features/newPlant/review/hooks/useStore";

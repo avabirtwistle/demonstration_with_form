@@ -1,4 +1,4 @@
-import { getRelationships } from "@/features/employee/additional-info/utils/api";
+import { getRelationships } from "@/features/employee/location-qrScan/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 const useRelationships = () => {

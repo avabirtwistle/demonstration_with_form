@@ -22,7 +22,7 @@ const EmployeeSkills = ({ readOnly }: ProviderProps) => {
 
   const handleSubmit: SubmitHandler<Schema> = (data) => {
     updateFormData(data);
-    navigate("/newPlant/additional-info");
+    navigate("/newPlant/location-qrScan");
   };
 
   return (

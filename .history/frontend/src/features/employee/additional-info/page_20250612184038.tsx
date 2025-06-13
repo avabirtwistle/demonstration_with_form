@@ -3,7 +3,7 @@ import { useFormContext } from "@/features/form/hooks/useFormContext";
 import { TextField } from "@/features/form/components/controllers/text-field";
 import Grid from "@mui/material/Grid2";
 import { d } from "@/utils/dictionary";
-import type { Schema } from "@/features/employee/additional-info/types/schema";
+import type { Schema } from "@/features/employee/location-qrScan/types/schema";
 
 const Page = () => {
   const { setValue } = useFormContext<Schema>();

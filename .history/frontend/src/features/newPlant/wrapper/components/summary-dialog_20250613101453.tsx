@@ -1,7 +1,7 @@
-import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/additional-info/hooks/useStore";
+import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrScan/hooks/useStore";
 
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
-import { EmployeeAdditionalInfo } from "@/features/newPlant/additional-info/page";
+import { EmployeeAdditionalInfo } from "@/features/newPlant/location-qrScan/page";
 import { useEmployeeHistoryStore } from "@/features/newPlant/history/hooks/useStore";
 import { TrayQR } from "@/features/newPlant/history/page";
 import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";

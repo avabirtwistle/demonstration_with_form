@@ -10,7 +10,7 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import { Form } from "@/features/form/components/form";
 
 // This is a modular section for entering prior employment history, likely a repeatable component.
-import { EmployeeHistory } from "@/features/employee/history/components/previous-employers";
+import { EmployeeHistory } from "@/features/employee/history/components/tray-contents";
 
 // This hook accesses shared state that lives outside of just this form — probably a global state store.
 // It lets you load the current form data and update it across steps.
