@@ -45,7 +45,7 @@ const d = {
   submit: "Submit",
   form: "Form",
   plantInfo: "Plant Info",
-  history: "History",
+  trayContents: "trayContents",
   additionalInfo: "Additional Info",
   review: "Review",
   graduationYear: "Graduation Year",

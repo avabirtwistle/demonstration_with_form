@@ -64,7 +64,7 @@ const Provider = ({ readOnly }: ProviderProps) => {
 
   const handleSubmit: SubmitHandler<Schema> = (data) => {
     updateFormData(data);
-    navigate("/newPlant/history");
+    navigate("/newPlant/trayContents");
   };
 
   return (

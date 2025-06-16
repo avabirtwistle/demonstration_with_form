@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
-import type { Schema } from '@/features/employee/history/types/schema';
+import type { Schema } from '@/features/employee/trayContents/types/schema';
 
 export function useOnDemandScan() {
   const { setValue } = useFormContext<Schema>();

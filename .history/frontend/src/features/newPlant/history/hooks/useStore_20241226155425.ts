@@ -1,7 +1,7 @@
 import {
   defaultValues,
   Schema,
-} from "@/features/employee/history/types/schema";
+} from "@/features/employee/trayContents/types/schema";
 import { createStore } from "@/utils/createStore";
 
 type State = {
@@ -23,7 +23,7 @@ const useStore = createStore<Store>(
       }),
   }),
   {
-    name: "employee-history-store",
+    name: "employee-trayContents-store",
   }
 );
 

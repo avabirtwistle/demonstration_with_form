@@ -1,8 +1,8 @@
 import { ErrorMessage } from "@/features/form/components/error-message";
 import { TextField } from "@/features/form/components/controllers/text-field";
-import { Schema } from "@/features/newPlant/history/types/schema";
+import { Schema } from "@/features/newPlant/trayContents/types/schema";
 import { d } from "@/utils/dictionary";
-import { useOnDemandScan } from "@/features/newPlant/history/utils/useOnDemandScan";
+import { useOnDemandScan } from "@/features/newPlant/trayContents/utils/useOnDemandScan";
 
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import RemoveCircleOutlineRoundedIcon from "@mui/icons-material/RemoveCircleOutlineRounded";

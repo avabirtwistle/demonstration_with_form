@@ -1,5 +1,5 @@
 import { EmployeeAdditionalInfo } from "@/features/employee/location-qrScan/page";
-import { TrayQR } from "@/features/employee/history/page";
+import { TrayQR } from "@/features/employee/trayContents/page";
 import { PlantInfo } from "@/features/employee/personal-info/page";
 import { EmployeeReview } from "@/features/employee/review/page";
 import { EmployeeSkills } from "@/features/employee/skills/page";
@@ -17,7 +17,7 @@ const RoutesWrapper = () => {
               path="/employee/personal-info"
               element={<PlantInfo />}
             />
-            <Route path="/employee/history" element={<TrayQR />} />
+            <Route path="/employee/trayContents" element={<TrayQR />} />
             <Route path="/employee/skills" element={<EmployeeSkills />} />
             <Route
               path="/employee/location-qrScan"

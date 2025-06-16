@@ -1,7 +1,7 @@
 import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrScan/hooks/useStore";
 import { locationQR } from "@/features/newPlant/location-qrScan/types/schema";
-import { useEmployeeHistoryStore } from "@/features/newPlant/history/hooks/useStore";
-import { employeeHistorySchema } from "@/features/newPlant/history/types/schema";
+import { useEmployeeHistoryStore } from "@/features/newPlant/trayContents/hooks/useStore";
+import { employeeHistorySchema } from "@/features/newPlant/trayContents/types/schema";
 import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";
 import { plantInfoSchema } from "@/features/newPlant/personal-info/types/schema";
 import { useEmployeeReviewStore } from "@/features/newPlant/review/hooks/useStore";
@@ -56,7 +56,7 @@ const Stepper = () => {
       success: plantInfoSuccess,
     },
     {
-      href: "/employee/history",
+      href: "/employee/trayContents",
       label: d.scanQR,
       success: employeeHistorySuccess,
     },

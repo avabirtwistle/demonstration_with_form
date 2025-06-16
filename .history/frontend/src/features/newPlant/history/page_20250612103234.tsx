@@ -9,12 +9,12 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 // It sets up schema-based validation (likely using Zod or Yup), handles submission, and provides layout.
 import { Form } from "@/features/form/components/form";
 
-// This is a modular section for entering prior employment history, likely a repeatable component.
-import { EmployeeHistory } from "@/features/employee/history/components/tray-contents";
+// This is a modular section for entering prior employment trayContents, likely a repeatable component.
+import { EmployeeHistory } from "@/features/employee/trayContents/components/tray-contents";
 
 // This hook accesses shared state that lives outside of just this form — probably a global state store.
 // It lets you load the current form data and update it across steps.
-import { useStore } from "@/features/employee/history/hooks/useStore";
+import { useStore } from "@/features/employee/trayContents/hooks/useStore";
 
 // These are all type-related and validation definitions:
 // - `Schema`: TypeScript type for the whole form data structure
@@ -25,7 +25,7 @@ import {
   defaultValues,
   schema,
   Schema,
-} from "@/features/employee/history/types/schema";
+} from "@/features/employee/trayContents/types/schema";
 
 // This is a dictionary object used to keep display strings (like labels) consistent and possibly support i18n.
 import { d } from "@/utils/dictionary";
@@ -59,7 +59,7 @@ const Page = () => {
       {/* 
         These are subcomponents that render sections for:
         - Previous employers (with fields like "Company", "Role", etc.)
-        - Education history (with fields like "School", "Degree", etc.)
+        - Education trayContents (with fields like "School", "Degree", etc.)
         Each is self-contained and uses form state behind the scenes.
       */}
       <EmployeeHistory />

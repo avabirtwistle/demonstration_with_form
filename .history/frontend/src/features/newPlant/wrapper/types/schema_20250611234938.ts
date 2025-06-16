@@ -1,5 +1,5 @@
 import { locationQR } from "@/features/employee/location-qrScan/types/schema";
-import { employeeHistorySchema } from "@/features/employee/history/types/schema";
+import { employeeHistorySchema } from "@/features/employee/trayContents/types/schema";
 import { plantInfoSchema } from "@/features/employee/personal-info/types/schema";
 import { employeeReviewSchema } from "@/features/employee/review/types/schema";
 import { employeeSkillsSchema } from "@/features/employee/skills/types/schema";

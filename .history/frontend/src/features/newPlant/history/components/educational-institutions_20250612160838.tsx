@@ -2,7 +2,7 @@ import { DatePicker } from "@/features/form/components/controllers/date-picker";
 import { ErrorMessage } from "@/features/form/components/error-message";
 import { TextField } from "@/features/form/components/controllers/text-field";
 
-import { Schema } from "@/features/employee/history/types/schema";
+import { Schema } from "@/features/employee/trayContents/types/schema";
 import { calculatePastDate } from "@/utils/calculatePastDate";
 import { d } from "@/utils/dictionary";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";

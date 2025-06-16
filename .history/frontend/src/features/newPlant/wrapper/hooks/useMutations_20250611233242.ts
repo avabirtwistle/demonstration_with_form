@@ -1,5 +1,5 @@
 import { useEmployeeAdditionalInfoStore } from "@/features/employee/location-qrScan/hooks/useStore";
-import { useEmployeeHistoryStore } from "@/features/employee/history/hooks/useStore";
+import { useEmployeeHistoryStore } from "@/features/employee/trayContents/hooks/useStore";
 import { usePlantInfoStore } from "@/features/employee/personal-info/hooks/useStore";
 import { useEmployeeReviewStore } from "@/features/employee/review/hooks/useStore";
 import { useEmployeeSkillsStore } from "@/features/employee/skills/hooks/useStore";
