@@ -1,4 +1,7 @@
-import { defaultValues, Schema } from "@/features/newPlant/locationFind/types/schema";
+import {
+  defaultValues,
+  Schema,
+} from "@/features/newPlant/location-qrScan/types/schema";
 import { createStore } from "@/utils/createStore";
 
 type State = {
@@ -11,7 +14,7 @@ type Actions = {
 
 type Store = State & Actions;
 
-const useStore = createStore<Store & { reset: () => void }>(
+const useStore = createStore<Store>(
   (set) => ({
     formData: defaultValues,
     updateFormData: (data) =>
@@ -24,8 +27,8 @@ const useStore = createStore<Store & { reset: () => void }>(
       }),
   }),
   {
-    name: "employee-skills-store",
+    name: "employee-location-qrScan-store",
   }
 );
 
-export { useStore, useStore as useEmployeeSkillsStore };
+export { useStore, useStore as useEmployeeAdditionalInfoStore };

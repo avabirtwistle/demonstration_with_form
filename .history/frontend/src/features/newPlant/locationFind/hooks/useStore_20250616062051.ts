@@ -1,7 +1,4 @@
-import {
-  defaultValues,
-  Schema,
-} from "@/features/newPlant/history/types/schema";
+import { defaultValues, Schema } from "@/features/newPlant/locationFind/types/schema";
 import { createStore } from "@/utils/createStore";
 
 type State = {
@@ -14,17 +11,21 @@ type Actions = {
 
 type Store = State & Actions;
 
-const useStore = createStore<Store>(
+const useStore = createStore<Store & { reset: () => void }>(
   (set) => ({
     formData: defaultValues,
     updateFormData: (data) =>
       set((state) => {
         state.formData = data;
       }),
+    reset: () =>
+      set((state) => {
+        state.formData = defaultValues;
+      }),
   }),
   {
-    name: "employee-history-store",
+    name: "employee-skills-store",
   }
 );
 
-export { useStore, useStore as useEmployeeHistoryStore };
+export { useStore, useStore as useEmployeeSkillsStore };

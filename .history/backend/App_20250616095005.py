@@ -71,6 +71,7 @@ def handle_location():
     if not code:
         return "Missing code", 400
     _location_qr = code
+    send_serial(loc, "off")
     print(f"[SCAN] Location scanned: {code}")
     return f"Location scanned: {code}", 200
 
@@ -90,7 +91,6 @@ def stream_location():
             if _location_qr and _location_qr != last:
                 yield f"data: {_location_qr}\n\n"
                 last = _location_qr
-
     return Response(events(), mimetype="text/event-stream")
 
 # — Generic send endpoint —

@@ -77,7 +77,6 @@ def handle_location():
 @app.route('/reset_location', methods=['POST'])
 def reset_location():
     global _location_qr
-    send_serial(loc, "on")
     _location_qr = None
     return "", 204
 
@@ -90,7 +89,6 @@ def stream_location():
             if _location_qr and _location_qr != last:
                 yield f"data: {_location_qr}\n\n"
                 last = _location_qr
-
     return Response(events(), mimetype="text/event-stream")
 
 # — Generic send endpoint —

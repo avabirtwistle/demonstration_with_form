@@ -9,15 +9,16 @@ export function useLocationQRScan() {
   const { setValue } = useFormContext<Schema>()
   const last = useRef<string | null>(null)
   let es: EventSource | null = null
- fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
-            .catch(err => console.error('Error turning light off:', err))
+
   const startScan = useCallback(async () => {
     try {
-      
       // Reset internal ref to avoid stale data
       last.current = null
-      fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
-            .catch(err => console.error('Error turning light off:', err))
+
+      // Turn on the A3 indicator light
+      await fetch(`${SERVER_URL}/light/${LIGHT_LOC}/on`)
+        .catch(err => console.error('Error turning light on:', err))
+
       // Reset the scanner on the backend
       await fetch(`${SERVER_URL}/reset_location`, { method: 'POST' })
         .catch(err => console.error('Error resetting scanner:', err))
@@ -25,15 +26,9 @@ export function useLocationQRScan() {
       // Open SSE stream with cache-buster to avoid stale events
       const streamUrl = `${SERVER_URL}/stream/location?ts=${Date.now()}`
       es = new EventSource(streamUrl)
-      fetch(`${SERVER_URL}/light/${LIGHT_LOC}/on?ts=${Date.now()}`)
-            .catch(err => console.error('Error turning light off:', err))
+
       es.onmessage = (e) => {
         const code = e.data as string
-              // Turn off the A3 indicator immediately and close stream
-          fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
-            .catch(err => console.error('Error turning light off:', err))
-          es?.close()
-          es = null
         if (code && code !== last.current) {
           last.current = code
           setValue('locationCode', code)

@@ -77,7 +77,6 @@ def handle_location():
 @app.route('/reset_location', methods=['POST'])
 def reset_location():
     global _location_qr
-    send_serial(loc, "on")
     _location_qr = None
     return "", 204
 

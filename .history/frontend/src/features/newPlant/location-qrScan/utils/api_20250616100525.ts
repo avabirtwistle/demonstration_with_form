@@ -9,8 +9,7 @@ export function useLocationQRScan() {
   const { setValue } = useFormContext<Schema>()
   const last = useRef<string | null>(null)
   let es: EventSource | null = null
- fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
-            .catch(err => console.error('Error turning light off:', err))
+
   const startScan = useCallback(async () => {
     try {
       

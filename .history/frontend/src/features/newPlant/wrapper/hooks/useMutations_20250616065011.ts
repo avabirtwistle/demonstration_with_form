@@ -29,8 +29,7 @@ const useCreate = () => {
 
     onSuccess: async () => {
       showSnack("Successful");
-      useEmployeeAdditionalInfoStore.getState().reset();
-     useEmployeeHistoryStore.getState().reset();
+     // useEmployeeAdditionalInfoStore.getState().reset();
     },
     onError: (error) => {
       showSnack(getErrorMessage(error), { variant: "error" });

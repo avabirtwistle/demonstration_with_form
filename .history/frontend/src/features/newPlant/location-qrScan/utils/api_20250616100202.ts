@@ -9,8 +9,7 @@ export function useLocationQRScan() {
   const { setValue } = useFormContext<Schema>()
   const last = useRef<string | null>(null)
   let es: EventSource | null = null
- fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
-            .catch(err => console.error('Error turning light off:', err))
+
   const startScan = useCallback(async () => {
     try {
       
@@ -24,16 +23,15 @@ export function useLocationQRScan() {
 
       // Open SSE stream with cache-buster to avoid stale events
       const streamUrl = `${SERVER_URL}/stream/location?ts=${Date.now()}`
+                        // Turn off the A3 indicator immediately and close stream
+          fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+            .catch(err => console.error('Error turning light off:', err))
+          es?.close()
       es = new EventSource(streamUrl)
       fetch(`${SERVER_URL}/light/${LIGHT_LOC}/on?ts=${Date.now()}`)
             .catch(err => console.error('Error turning light off:', err))
       es.onmessage = (e) => {
         const code = e.data as string
-              // Turn off the A3 indicator immediately and close stream
-          fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
-            .catch(err => console.error('Error turning light off:', err))
-          es?.close()
-          es = null
         if (code && code !== last.current) {
           last.current = code
           setValue('locationCode', code)
@@ -45,6 +43,10 @@ export function useLocationQRScan() {
           es?.close()
           es = null
         }
+                  // Turn off the A3 indicator immediately and close stream
+          fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+            .catch(err => console.error('Error turning light off:', err))
+          es?.close()
       }
 
       es.onerror = (err) => {
@@ -61,6 +63,7 @@ export function useLocationQRScan() {
       fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
         .catch(err => console.error('Error turning light off on exception:', err))
     }
+    
   }, [setValue])
 
   return { startScan }
