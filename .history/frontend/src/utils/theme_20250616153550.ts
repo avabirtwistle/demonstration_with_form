@@ -11,7 +11,7 @@ const theme = createTheme({
         },
         background: {
           default: "#E0E0E0", // background of the whole page
-          paper: "#E0E0E0",   // background of cards/Paper components
+          paper: "#013A20",   // background of cards/Paper components
         },
         text: {
           primary: "#ffffff",   // main text

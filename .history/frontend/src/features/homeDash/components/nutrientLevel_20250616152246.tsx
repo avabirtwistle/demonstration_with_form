@@ -13,7 +13,7 @@ export type NutrientLevelsProps = {
  */
 const NutrientLevels: React.FC<NutrientLevelsProps> = ({ levelA, levelB }) => {
   return (
-    <Card elevation={2} sx={{ borderRadius: 2, p: 2, maxWidth: 400, mx: 'auto', backgroundColor: '#709AAA'}}>
+    <Card elevation={2} sx={{ borderRadius: 2, p: 2, maxWidth: 400, mx: 'auto', backgroundColor: '#125773'}}>
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={12}>

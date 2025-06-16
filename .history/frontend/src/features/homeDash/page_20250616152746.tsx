@@ -23,7 +23,7 @@ const Page = () => {
       <Grid container spacing={10}>
         {/* Scheduled Tasks */}
                   <Paper
-            elevation={4}
+            elevation={2}
             sx={{
               p: 2,
               bgcolor: '#FFFFFF',    // matching card background
@@ -36,11 +36,11 @@ const Page = () => {
             </Typography>
               <ScrollableList />
         </Grid>
-</Paper>
+
         {/* Nutrient Levels Card */}
         <Grid item xs={12} md={6}>
           <Paper
-            elevation={4}
+            elevation={2}
             sx={{
               p: 2,
               bgcolor: '#FFFFFF',    // matching card background

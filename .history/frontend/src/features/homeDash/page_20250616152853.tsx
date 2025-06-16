@@ -40,7 +40,7 @@ const Page = () => {
         {/* Nutrient Levels Card */}
         <Grid item xs={12} md={6}>
           <Paper
-            elevation={4}
+            elevation={-8}
             sx={{
               p: 2,
               bgcolor: '#FFFFFF',    // matching card background

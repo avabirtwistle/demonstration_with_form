@@ -10,8 +10,8 @@ const theme = createTheme({
           main: "#E0E0E0", // bright cyan-blue for buttons/links
         },
         background: {
-          default: "#E0E0E0", // background of the whole page
-          paper: "#E0E0E0",   // background of cards/Paper components
+          default: "#D1E2C4", // background of the whole page
+          paper: "#013A20",   // background of cards/Paper components
         },
         text: {
           primary: "#ffffff",   // main text

@@ -94,7 +94,7 @@ const DashboardLayout = () => {
             width: DRAWER_WIDTH,
             boxSizing: "border-box",
             backgroundColor: "#0B642A", // ← light green as an example
-            color: "white",             // optional: ensure text is visible
+            color: "black",             // optional: ensure text is visible
           },
         }}
         variant="persistent"

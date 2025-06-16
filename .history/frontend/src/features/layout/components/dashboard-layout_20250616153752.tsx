@@ -93,13 +93,10 @@ const DashboardLayout = () => {
           "& .MuiDrawer-paper": {
             width: DRAWER_WIDTH,
             boxSizing: "border-box",
-            backgroundColor: "#0B642A", // ← light green as an example
-            color: "white",             // optional: ensure text is visible
+            backgroundColor: "#C8E6C9", // ← light green as an example
+            color: "black",             // optional: ensure text is visible
           },
         }}
-        variant="persistent"
-        anchor="left"
-        open={drawerOpen}
       >
         <Box
           sx={{
