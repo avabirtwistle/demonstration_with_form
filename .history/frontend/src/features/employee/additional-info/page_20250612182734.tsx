@@ -15,14 +15,14 @@ import { d } from "@/utils/dictionary";
 const Page = () => {
   const { setValue, watch, readOnly } = useFormContext<Schema>();
   const startScan = useOnDemandScan<Schema>();
-  const value = watch("portfolioLink");
+  const value = watch("locationCode");
 
   return (
     <Grid container spacing={2} alignItems="center">
       <Grid xs={10}>
         <TextField<Schema>
-          name="portfolioLink"
-          label={d.portfolioLink}
+          name="locationCode"
+          label={d.locationCode}
           InputProps={{ readOnly: true }}
           helperText={readOnly ? undefined : "Auto-filled by QR scan"}
         />
@@ -31,7 +31,7 @@ const Page = () => {
         <IconButton
           aria-label="scan qr"
           disabled={readOnly}
-          onClick={() => startScan("portfolioLink")}
+          onClick={() => startScan("locationCode")}
           size="large"
         >
           <QrCodeScannerIcon />

@@ -29,7 +29,7 @@ const Page = () => {
   return (
     <>
       <Grid size={{ xs: 6 }}>
-        <TextField<Schema> name="qrCode" label={d.portfolioLink} />
+        <TextField<Schema> name="qrCode" label={d.locationCode} />
       </Grid>
     </>
   );

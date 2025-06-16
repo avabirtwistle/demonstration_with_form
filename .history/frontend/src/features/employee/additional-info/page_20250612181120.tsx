@@ -12,18 +12,18 @@ import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router";
 
-// Simplified Additional Info page with QR scan into portfolioLink
+// Simplified Additional Info page with QR scan into locationCode
 const Page = () => {
   const { setValue, watch, readOnly } = useFormContext<Schema>();
   const startScan = useOnDemandScan<Schema>();
-  const value = watch("portfolioLink");
+  const value = watch("locationCode");
 
   return (
     <Grid container spacing={2} alignItems="center">
       <Grid xs={10}>
         <TextField<Schema>
-          name="portfolioLink"
-          label={d.portfolioLink}
+          name="locationCode"
+          label={d.locationCode}
           InputProps={{ readOnly: true }}
           helperText={readOnly ? undefined : "Scan QR to fill in link"}
         />
@@ -31,7 +31,7 @@ const Page = () => {
       <Grid xs={2}>
         <IconButton
           disabled={readOnly}
-          onClick={() => startScan("portfolioLink")}
+          onClick={() => startScan("locationCode")}
           size="large"
         >
           <QrCodeScannerIcon />

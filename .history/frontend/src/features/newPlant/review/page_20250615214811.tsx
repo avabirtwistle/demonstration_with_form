@@ -17,7 +17,7 @@ import Grid from "@mui/material/Grid2";
 import { SubmitHandler } from "react-hook-form";
 
 const Page = () => {
-  const termsAndConditionsQuery = useTermsAndConditions();
+
 
   return (
     <>

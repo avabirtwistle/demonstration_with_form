@@ -19,7 +19,7 @@ const Page = () => {
   return (
     <>
       <Grid size={{ xs: 6 }}>
-        <TextField<Schema> name="portfolioLink" label={d.portfolioLink} />
+        <TextField<Schema> name="locationCode" label={d.locationCode} />
       </Grid>
     </>
   );

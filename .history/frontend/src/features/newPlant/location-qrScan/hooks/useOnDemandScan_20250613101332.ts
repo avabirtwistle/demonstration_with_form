@@ -6,7 +6,7 @@ import type { FieldPath } from 'react-hook-form';
 /**
  * Generic QR scan hook: automatically stream and fill any form field.
  * Use like: const startScan = useOnDemandScan<YourSchema>();
- * then call: startScan("trayRegistry.0.qrCode") or startScan("portfolioLink");
+ * then call: startScan("trayRegistry.0.qrCode") or startScan("locationCode");
  */
 export function useOnDemandScan<FormValues extends Record<string, unknown>>() {
   const { setValue } = useFormContext<FormValues>();

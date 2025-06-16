@@ -21,7 +21,7 @@ const Page = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setValue("portfolioLink", "LOC-02-02-03-1479B1DF");
+      setValue("locationCode", "LOC-02-02-03-1479B1DF");
     }, 1500);
     return () => clearTimeout(timeout);
   }, [setValue]);
@@ -29,7 +29,7 @@ const Page = () => {
   return (
     <>
       <Grid size={{ xs: 6 }}>
-        <TextField<Schema> name="LOC-02-02-03-1479B1DF" label={d.portfolioLink} />
+        <TextField<Schema> name="LOC-02-02-03-1479B1DF" label={d.locationCode} />
       </Grid>
     </>
   );

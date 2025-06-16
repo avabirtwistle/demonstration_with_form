@@ -35,7 +35,7 @@ const d = {
   location: "Location",
   yearsOfExperience: "Years of Experience",
   description: "Description",
-  portfolioLink: "Location QR Code",
+  locationCode: "Location QR Code",
   availabilityToStart: "Availability to Start",
   salaryExpectations: "Salary Expectations",
   references: "References",
