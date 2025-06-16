@@ -26,7 +26,7 @@ const Page = () => {
             elevation={4}
             sx={{
               p: 2,
-              bgcolor: '#B9B9B9',    // matching card background
+              bgcolor: '#FFFFFF',    // matching card background
               borderRadius: 2,
             }}
           >
@@ -40,10 +40,10 @@ const Page = () => {
         {/* Nutrient Levels Card */}
         <Grid item xs={12} md={6}>
           <Paper
-            elevation={3}
+            elevation={}
             sx={{
               p: 2,
-              bgcolor: '#B9B9B9',    // matching card background
+              bgcolor: '#FFFFFF',    // matching card background
               borderRadius: 2,
             }}
           >

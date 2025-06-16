@@ -155,7 +155,7 @@ const DashboardLayout = () => {
       >
         <Box sx={{ ...theme.mixins.toolbar }} />
 
-        <Paper sx={{ padding: 3, backgroundColor: "#043F18" }}>
+        <Paper sx={{ padding: 3, backgroundColor: "#1DB653" }}>
           <Outlet />
         </Paper>
       </Box>

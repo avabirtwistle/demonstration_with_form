@@ -26,12 +26,12 @@ const Page = () => {
             elevation={4}
             sx={{
               p: 2,
-              bgcolor: '#B9B9B9',    // matching card background
+              bgcolor: '#FFFFFF',    // matching card background
               borderRadius: 2,
             }}
           >
         <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom sx={{ color: '#0E1304' }}>
+            <Typography variant="h5" gutterBottom sx={{ color: "#043F18" }}>
               Scheduled Tasks
             </Typography>
               <ScrollableList />
@@ -40,10 +40,10 @@ const Page = () => {
         {/* Nutrient Levels Card */}
         <Grid item xs={12} md={6}>
           <Paper
-            elevation={3}
+            elevation={4}
             sx={{
               p: 2,
-              bgcolor: '#B9B9B9',    // matching card background
+              bgcolor: '#FFFFFF',    // matching card background
               borderRadius: 2,
             }}
           >

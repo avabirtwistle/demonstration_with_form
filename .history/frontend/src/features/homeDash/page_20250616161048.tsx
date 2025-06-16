@@ -43,7 +43,7 @@ const Page = () => {
             elevation={3}
             sx={{
               p: 2,
-              bgcolor: '#B9B9B9',    // matching card background
+              bgcolor: '#FFFFFF',    // matching card background
               borderRadius: 2,
             }}
           >

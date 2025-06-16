@@ -16,7 +16,7 @@ const Page = () => {
       maxWidth="lg"
       sx={{
         py: 4,
-        bgcolor: '#E0E0E0',       // lighter background for the entire page
+        bgcolor: "#043F18",       // lighter background for the entire page
         minHeight: '100vh',       // ensure full height
       }}
     >
@@ -26,7 +26,7 @@ const Page = () => {
             elevation={4}
             sx={{
               p: 2,
-              bgcolor: '#B9B9B9',    // matching card background
+              bgcolor: '#FFFFFF',    // matching card background
               borderRadius: 2,
             }}
           >
@@ -43,7 +43,7 @@ const Page = () => {
             elevation={3}
             sx={{
               p: 2,
-              bgcolor: '#B9B9B9',    // matching card background
+              bgcolor: '#FFFFFF',    // matching card background
               borderRadius: 2,
             }}
           >
