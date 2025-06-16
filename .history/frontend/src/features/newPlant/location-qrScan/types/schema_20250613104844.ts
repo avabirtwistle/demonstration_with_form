@@ -14,7 +14,7 @@ const defaultValues: Schema = {
 
 export {
   schema,
-  schema as employeeAdditionalInfoSchema,
+  schema as locationQR,
   type Schema,
   defaultValues,
 };

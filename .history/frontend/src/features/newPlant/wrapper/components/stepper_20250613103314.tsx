@@ -1,5 +1,5 @@
 import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrScan/hooks/useStore";
-import { employeeAdditionalInfoSchema } from "@/features/newPlant/location-qrScan/types/schema";
+import { locationQR } from "@/features/newPlant/location-qrScan/types/schema";
 import { useEmployeeHistoryStore } from "@/features/newPlant/history/hooks/useStore";
 import { employeeHistorySchema } from "@/features/newPlant/history/types/schema";
 import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";
@@ -43,7 +43,7 @@ const Stepper = () => {
   );
 
   const { success: employeeAdditionalInfoSuccess } =
-    employeeAdditionalInfoSchema.safeParse(employeeAdditionalInfoFormData);
+    locationQR.safeParse(employeeAdditionalInfoFormData);
 
   const { success: employeeReviewSuccess } = employeeReviewSchema.safeParse(
     employeeReviewFormData
