@@ -1,4 +1,4 @@
-import { useRelationships } from "@/features/newPlant/location-qrScan/hooks/useQueries";
+/*import { useRelationships } from "@/features/newPlant/location-qrScan/hooks/useQueries";
 
 import { Schema } from "@/features/newPlant/location-qrScan/types/schema";
 import { Autocomplete } from "@/features/form/components/controllers/autocomplete";
@@ -99,3 +99,4 @@ const References = () => {
 };
 
 export { References };
+*/

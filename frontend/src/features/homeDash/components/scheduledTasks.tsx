@@ -20,7 +20,8 @@ interface Item {
 
 const ScrollableList: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [allCategories, setAllCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const dummyData: Item[] = [
@@ -32,26 +33,22 @@ const ScrollableList: React.FC = () => {
       { id: 6, text: 'Final rinse',    category: 'Cleaning'    },
     ];
     setItems(dummyData);
-    // Initialize toggles to show all categories by default
-    setSelectedCategories(Array.from(new Set(dummyData.map(i => i.category))));
+    setAllCategories(Array.from(new Set(dummyData.map(i => i.category))));
   }, []);
-  
 
   const handleComplete = (id: number) => {
     setItems(prev => prev.filter(item => item.id !== id));
   };
 
-  // all unique categories
-  const allCategories = Array.from(new Set(items.map(i => i.category)));
+  const filtered = selectedCategory
+    ? items.filter(i => i.category === selectedCategory)
+    : items;
 
-  // group filtered items by category
-  const groups = items
-    .filter(i => selectedCategories.includes(i.category))
-    .reduce((map, item) => {
-      if (!map[item.category]) map[item.category] = [];
-      map[item.category].push(item);
-      return map;
-    }, {} as Record<string, Item[]>);
+  const groups = filtered.reduce((map, item) => {
+    if (!map[item.category]) map[item.category] = [];
+    map[item.category].push(item);
+    return map;
+  }, {} as Record<string, Item[]>);
 
   return (
     <Box
@@ -62,49 +59,52 @@ const ScrollableList: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
+        bgcolor: '#E0E0E0',
+        color: 'black'
       }}
     >
-      {/* Sticky header */}
+      {/* header + toggles */}
       <Box
         sx={{
           p: 1,
           borderBottom: '1px solid #ddd',
           position: 'sticky',
           top: 0,
-          bgcolor: 'background.paper',
+          bgcolor: '#073547',
           zIndex: 2,
         }}
       >
-        <Typography variant="subtitle1" gutterBottom>
-          Tasks by Category
-        </Typography>
 
-        {/* Category toggles */}
         <ToggleButtonGroup
           size="small"
-          value={selectedCategories}
-          onChange={(_, newCats) => setSelectedCategories(newCats)}
-          aria-label="filter categories"
-          
+          exclusive
+          value={selectedCategory}
+          onChange={(_, cat) => setSelectedCategory(cat)}
+          aria-label="filter category"
         >
           {allCategories.map(cat => (
-            <ToggleButton key={cat} value={cat} aria-label={cat}
-              sx={{ textTransform: 'none' }} >
-              {cat} 
+            <ToggleButton
+              key={cat}
+              value={cat}
+              aria-label={cat}
+              sx={{ textTransform: 'none' }}
+            >
+              {cat}
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
       </Box>
 
-      {/* Scrollable list area */}
+      {/* scrollable list area */}
       <Box sx={{ overflowY: 'auto', flexGrow: 1 }}>
-        <List disablePadding>
+        {/* apply the same horizontal padding as the header (p=1 => 8px) */}
+        <List disablePadding sx={{ px: 0 }}>
           {Object.entries(groups).map(([category, itemsInCategory]) => (
             <li key={category}>
-              <ul>
-                <ListSubheader sx={{ 
-                    bgcolor: 'background.paper',
-                    textTransform: 'none' }}>
+              <ul style={{ margin: 0, padding: 0 }}>
+                <ListSubheader
+                  sx={{ bgcolor: '#125773'}}
+                >
                   {category}
                 </ListSubheader>
                 {itemsInCategory.map(item => (
@@ -126,13 +126,9 @@ const ScrollableList: React.FC = () => {
             </li>
           ))}
 
-          {items.filter(i => selectedCategories.includes(i.category)).length === 0 && (
-            <Typography
-              variant="body2"
-              align="center"
-              sx={{ mt: 2, px: 2 }}
-            >
-              No tasks in selected categories.
+          {filtered.length === 0 && (
+            <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+              No tasks in selected category.
             </Typography>
           )}
         </List>

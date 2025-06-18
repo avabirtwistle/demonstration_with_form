@@ -2,7 +2,7 @@ import { Form } from "@/features/form/components/form";
 
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 
-import { useTermsAndConditions } from "@/features/newPlant/review/hooks/useQueries";
+//import { useTermsAndConditions } from "@/features/newPlant/review/hooks/useQueries";
 import { useStore } from "@/features/newPlant/review/hooks/useStore";
 import {
   defaultValues,
@@ -17,7 +17,7 @@ import Grid from "@mui/material/Grid2";
 import { SubmitHandler } from "react-hook-form";
 
 const Page = () => {
-  const termsAndConditionsQuery = useTermsAndConditions();
+
 
   return (
     <>

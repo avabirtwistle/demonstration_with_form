@@ -20,6 +20,7 @@ import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Outlet } from "react-router";
+import greenreach_logo from "@/features/layout/components/greenreach_logo.png";
 
 const DashboardLayout = () => {
   const theme = useTheme();
@@ -39,6 +40,7 @@ const DashboardLayout = () => {
       <MuiAppBar
         position="fixed"
         sx={{
+          backgroundColor: "#E0E0E0",
           transition: theme.transitions.create(["margin", "width"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -74,9 +76,12 @@ const DashboardLayout = () => {
               alignItems: "center",
             }}
           >
-            <Typography variant="h6" noWrap component="div">
-              {d.dashboard}
-            </Typography>
+            <Box
+              component="img"
+              src={greenreach_logo}
+              alt="GreenReach Logo"
+              sx={{ height: 40, width: 175}}
+            />
             <ThemeToggle />
           </Stack>
         </Toolbar>
@@ -88,6 +93,8 @@ const DashboardLayout = () => {
           "& .MuiDrawer-paper": {
             width: DRAWER_WIDTH,
             boxSizing: "border-box",
+            backgroundColor: "#0B642A", // ← light green as an example
+            color: "white",             // optional: ensure text is visible
           },
         }}
         variant="persistent"
@@ -118,7 +125,7 @@ const DashboardLayout = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton href="/newPlant/personal-info">
+            <ListItemButton href="/newPlant/trayPlantSelection">
               <ListItemIcon>
                 <SpaIcon />
               </ListItemIcon>
@@ -148,7 +155,7 @@ const DashboardLayout = () => {
       >
         <Box sx={{ ...theme.mixins.toolbar }} />
 
-        <Paper sx={{ padding: 3 }}>
+        <Paper sx={{ padding: 3, backgroundColor: "#043F18" }}>
           <Outlet />
         </Paper>
       </Box>

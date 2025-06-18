@@ -1,9 +1,9 @@
 import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrScan/hooks/useStore";
-import { employeeAdditionalInfoSchema } from "@/features/newPlant/location-qrScan/types/schema";
-import { useEmployeeHistoryStore } from "@/features/newPlant/history/hooks/useStore";
-import { employeeHistorySchema } from "@/features/newPlant/history/types/schema";
-import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";
-import { plantInfoSchema } from "@/features/newPlant/personal-info/types/schema";
+import { locationQR } from "@/features/newPlant/location-qrScan/types/schema";
+import { useEmployeeHistoryStore } from "@/features/newPlant/trayQrScan/hooks/useStore";
+import { employeeHistorySchema } from "@/features/newPlant/trayQrScan/types/schema";
+import { usePlantInfoStore } from "@/features/newPlant/trayPlantSelection/hooks/useStore";
+import { plantInfoSchema } from "@/features/newPlant/trayPlantSelection/types/schema";
 import { useEmployeeReviewStore } from "@/features/newPlant/review/hooks/useStore";
 import { employeeReviewSchema } from "@/features/newPlant/review/types/schema";
 import { useEmployeeSkillsStore } from "@/features/newPlant/locationFind/hooks/useStore";
@@ -43,20 +43,21 @@ const Stepper = () => {
   );
 
   const { success: employeeAdditionalInfoSuccess } =
-    employeeAdditionalInfoSchema.safeParse(employeeAdditionalInfoFormData);
+    locationQR.safeParse(employeeAdditionalInfoFormData);
 
   const { success: employeeReviewSuccess } = employeeReviewSchema.safeParse(
     employeeReviewFormData
   );
 
+
   const steps = [
     {
-      href: "/newPlant/personal-info",
+      href: "/newPlant/trayPlantSelection",
       label: d.plantInfo,
       success: plantInfoSuccess,
     },
     {
-      href: "/newPlant/history",
+      href: "/newPlant/trayQrScan",
       label: d.scanQR,
       success: employeeHistorySuccess,
     },
@@ -80,9 +81,12 @@ const Stepper = () => {
   const activeStep = steps.findIndex((item) => item.href === pathname);
 
   return (
-    <MuiStepper nonLinear activeStep={activeStep}>
+    //return a multistepper that is linear so we cant skip steps
+    <MuiStepper activeStep={activeStep}>  
+     {/* Loop through all steps to render one <Step> per route */}
       {steps.map((step) => (
         <Step key={step.href}>
+          {/* Each Step contains a clickable StepButton */}
           <StepButton
             color="inherit"
             href={step.href}

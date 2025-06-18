@@ -10,6 +10,7 @@ type State = {
 
 type Actions = {
   updateFormData: (data: State["formData"]) => void;
+  reset: () => void;
 };
 
 type Store = State & Actions;
@@ -20,6 +21,10 @@ const useStore = createStore<Store>(
     updateFormData: (data) =>
       set((state) => {
         state.formData = data;
+      }),
+    reset: () =>
+      set((state) => {
+        state.formData = defaultValues;
       }),
   }),
   {

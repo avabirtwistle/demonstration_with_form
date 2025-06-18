@@ -1,4 +1,4 @@
-import { getRelationships } from "@/features/newPlant/location-qrScan/utils/api";
+/*import { getRelationships } from "@/features/newPlant/location-qrScan/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 const useRelationships = () => {
@@ -9,3 +9,4 @@ const useRelationships = () => {
 };
 
 export { useRelationships };
+*/

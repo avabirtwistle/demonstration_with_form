@@ -1,20 +1,67 @@
-import { AutocompleteOption } from "@/features/form/components/controllers/autocomplete";
-import { wait } from "@/utils/wait";
+import { useRef, useCallback } from 'react'
+import { useFormContext } from '@/features/form/hooks/useFormContext'   // ← your custom one
+import type { Schema } from '@/features/newPlant/location-qrScan/types/schema'
 
-const getRelationships = async (): Promise<AutocompleteOption[]> => {
-  await wait();
-  return [
-    { label: "Former Manager", value: "1" },
-    { label: "Current Manager", value: "2" },
-    { label: "Direct Supervisor", value: "3" },
-    { label: "Team Lead", value: "4" },
-    { label: "Project Manager", value: "5" },
-    { label: "Colleague", value: "6" },
-    { label: "Senior Colleague", value: "7" },
-    { label: "Department Head", value: "8" },
-    { label: "Professional Mentor", value: "9" },
-    { label: "Client", value: "10" },
-  ];
-};
+const SERVER_URL = 'http://localhost:5000'
+const LIGHT_LOC = 'A3'
 
-export { getRelationships };
+export function useLocationQRScan() {
+  const { setValue } = useFormContext<Schema>()
+  const last = useRef<string | null>(null)
+  let es: EventSource | null = null
+ fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+            .catch(err => console.error('Error turning light off:', err))
+  const startScan = useCallback(async () => {
+    try {
+      
+      // Reset internal ref to avoid stale data
+      last.current = null
+      fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+            .catch(err => console.error('Error turning light off:', err))
+      // Reset the scanner on the backend
+      await fetch(`${SERVER_URL}/reset_location`, { method: 'POST' })
+        .catch(err => console.error('Error resetting scanner:', err))
+
+      // Open SSE stream with cache-buster to avoid stale events
+      const streamUrl = `${SERVER_URL}/stream/location?ts=${Date.now()}`
+      es = new EventSource(streamUrl)
+      fetch(`${SERVER_URL}/light/${LIGHT_LOC}/on?ts=${Date.now()}`)
+            .catch(err => console.error('Error turning light off:', err))
+      es.onmessage = (e) => {
+        const code = e.data as string
+              // Turn off the A3 indicator immediately and close stream
+          fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+            .catch(err => console.error('Error turning light off:', err))
+          es?.close()
+          es = null
+        if (code && code !== last.current) {
+          last.current = code
+          setValue('locationCode', code)
+          console.log('Scanned locationCode:', code)
+
+          // Turn off the A3 indicator immediately and close stream
+          fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+            .catch(err => console.error('Error turning light off:', err))
+          es?.close()
+          es = null
+        }
+      }
+
+      es.onerror = (err) => {
+        console.error('SSE error', err)
+        // Ensure the light is off on error
+        fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+          .catch(err => console.error('Error turning light off on error:', err))
+        es?.close()
+        es = null
+      }
+    } catch (err) {
+      console.error('Fetch/reset error', err)
+      // Ensure the light is off if any step fails
+      fetch(`${SERVER_URL}/light/${LIGHT_LOC}/off?ts=${Date.now()}`)
+        .catch(err => console.error('Error turning light off on exception:', err))
+    }
+  }, [setValue])
+
+  return { startScan }
+}

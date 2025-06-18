@@ -7,11 +7,11 @@ const theme = createTheme({
     dark: {
       palette: {
         primary: {
-          main: "#76B947", // bright cyan-blue for buttons/links
+          main: "#E0E0E0", // bright cyan-blue for buttons/links
         },
         background: {
-          default: "#D1E2C4", // background of the whole page
-          paper: "#013A20",   // background of cards/Paper components
+          default: "#E0E0E0", // background of the whole page
+          paper: "#E0E0E0",   // background of cards/Paper components
         },
         text: {
           primary: "#ffffff",   // main text
