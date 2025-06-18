@@ -116,6 +116,14 @@ def light_off(loc):
     send_serial(loc, "off")
     return "", 204
 
+@app.route("/api/get-location", methods=["GET"])
+def get_proficiency_levels():
+    return jsonify({
+        "projectManagement": "02",
+        "communication": "02",
+        "technicalSkills": "03"
+    })
+
 if __name__ == "__main__":
     print("\nRegistered routes:")
     for rule in app.url_map.iter_rules():
