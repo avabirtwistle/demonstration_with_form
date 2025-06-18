@@ -1,9 +1,9 @@
 import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrScan/hooks/useStore";
 import { locationQR } from "@/features/newPlant/location-qrScan/types/schema";
-import { useEmployeeHistoryStore } from "@/features/newPlant/trayContents/hooks/useStore";
-import { employeeHistorySchema } from "@/features/newPlant/trayContents/types/schema";
-import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";
-import { plantInfoSchema } from "@/features/newPlant/personal-info/types/schema";
+import { useEmployeeHistoryStore } from "@/features/newPlant/trayQrScan/hooks/useStore";
+import { employeeHistorySchema } from "@/features/newPlant/trayQrScan/types/schema";
+import { usePlantInfoStore } from "@/features/newPlant/trayPlantSelection/hooks/useStore";
+import { plantInfoSchema } from "@/features/newPlant/trayPlantSelection/types/schema";
 import { useEmployeeReviewStore } from "@/features/newPlant/review/hooks/useStore";
 import { employeeReviewSchema } from "@/features/newPlant/review/types/schema";
 import { useEmployeeSkillsStore } from "@/features/newPlant/locationFind/hooks/useStore";
@@ -52,12 +52,12 @@ const Stepper = () => {
 
   const steps = [
     {
-      href: "/newPlant/personal-info",
+      href: "/newPlant/trayPlantSelection",
       label: d.plantInfo,
       success: plantInfoSuccess,
     },
     {
-      href: "/newPlant/trayContents",
+      href: "/newPlant/trayQrScan",
       label: d.scanQR,
       success: employeeHistorySuccess,
     },

@@ -1,6 +1,6 @@
 import { locationQR } from "@/features/newPlant/location-qrScan/types/schema";
-import { employeeHistorySchema } from "@/features/newPlant/trayContents/types/schema";
-import { plantInfoSchema } from "@/features/newPlant/personal-info/types/schema";
+import { employeeHistorySchema } from "@/features/newPlant/trayQrScan/types/schema";
+import { plantInfoSchema } from "@/features/newPlant/trayPlantSelection/types/schema";
 import { employeeReviewSchema } from "@/features/newPlant/review/types/schema";
 import { employeeSkillsSchema } from "@/features/newPlant/locationFind/types/schema";
 import { z } from "zod";

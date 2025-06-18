@@ -2,7 +2,7 @@ import {
   getDegrees,
   getEmploymentStatuses,
   getReasonsForLeaving,
-} from "@/features/newPlant/trayContents/utils/api";
+} from "@/features/newPlant/trayQrScan/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 const useEmploymentStatuses = () => {

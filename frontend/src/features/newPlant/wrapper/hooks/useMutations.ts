@@ -1,6 +1,6 @@
 import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrScan/hooks/useStore";
-import { useEmployeeHistoryStore } from "@/features/newPlant/trayContents/hooks/useStore";
-import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";
+import { useEmployeeHistoryStore } from "@/features/newPlant/trayQrScan/hooks/useStore";
+import { usePlantInfoStore } from "@/features/newPlant/trayPlantSelection/hooks/useStore";
 import { useEmployeeReviewStore } from "@/features/newPlant/review/hooks/useStore";
 import { useEmployeeSkillsStore } from "@/features/newPlant/locationFind/hooks/useStore";
 import { create } from "@/features/newPlant/wrapper/utils/api";

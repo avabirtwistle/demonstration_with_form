@@ -2,10 +2,10 @@ import { useEmployeeAdditionalInfoStore } from "@/features/newPlant/location-qrS
 
 import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
 import { EmployeeAdditionalInfo } from "@/features/newPlant/location-qrScan/page";
-import { useEmployeeHistoryStore } from "@/features/newPlant/trayContents/hooks/useStore";
-import { TrayQR } from "@/features/newPlant/trayContents/page";
-import { usePlantInfoStore } from "@/features/newPlant/personal-info/hooks/useStore";
-import { PlantInfo } from "@/features/newPlant/personal-info/page";
+import { useEmployeeHistoryStore } from "@/features/newPlant/trayQrScan/hooks/useStore";
+import { TrayQR } from "@/features/newPlant/trayQrScan/page";
+import { usePlantInfoStore } from "@/features/newPlant/trayPlantSelection/hooks/useStore";
+import { PlantInfo } from "@/features/newPlant/trayPlantSelection/page";
 import { useEmployeeReviewStore } from "@/features/newPlant/review/hooks/useStore";
 import { EmployeeReview } from "@/features/newPlant/review/page";
 import { useEmployeeSkillsStore } from "@/features/newPlant/locationFind/hooks/useStore";

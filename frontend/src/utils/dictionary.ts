@@ -45,7 +45,7 @@ const d = {
   submit: "Submit",
   form: "Form",
   plantInfo: "Plant Info",
-  trayContents: "trayContents",
+  trayQrScan: "trayQrScan",
   additionalInfo: "Scan the Location QR",
   review: "Review",
   graduationYear: "Graduation Year",

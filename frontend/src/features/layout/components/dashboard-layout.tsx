@@ -125,7 +125,7 @@ const DashboardLayout = () => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton href="/newPlant/personal-info">
+            <ListItemButton href="/newPlant/trayPlantSelection">
               <ListItemIcon>
                 <SpaIcon />
               </ListItemIcon>

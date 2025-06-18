@@ -1,7 +1,7 @@
 import {
   defaultValues,
   Schema,
-} from "@/features/newPlant/trayContents/types/schema";
+} from "@/features/newPlant/trayQrScan/types/schema";
 import { createStore } from "@/utils/createStore";
 
 type State = {
@@ -28,7 +28,7 @@ const useStore = createStore<Store>(
       })),
   }),
   {
-    name: "employee-trayContents-store",
+    name: "employee-trayQrScan-store",
   }
 );
 
