@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.greenreach.features.plantTray.Tray;
+
 /**
  * Represents a slot on the level of a rack which is where a filled plant tray can be placed. Used for
  * planning grow schedules, determing inventory location and data operations. Only one tray containing
