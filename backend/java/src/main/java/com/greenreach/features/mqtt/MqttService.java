@@ -3,7 +3,24 @@ package com.greenreach.features.mqtt;
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ * MqttService handles MQTT communication for the GreenReach system.
+ * <p>
+ * It subscribes to status updates from all devices and provides a method to 
+ * publish commands to specific rack controllers using MQTT topics.
+ * </p>
+ *
+ * Topics follow the format:
+ * - Subscription: greenreach/+/status  (status updates from any device)
+ * - Publishing: greenreach/{rackId}/commands/{command} (commands to a rack)
+ *
+ * This service uses Eclipse Paho for MQTT messaging and is marked as a Spring
+ * @Service for dependency injection.
+ *
+ * @author Ava Birtwistle
+ * @version 1.0
+ * @since 2025-06-20
+ */
 @Service
 public class MqttService {
 

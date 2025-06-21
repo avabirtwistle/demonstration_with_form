@@ -19,6 +19,7 @@ dependencies {
     implementation("com.github.gwenn:sqlite-dialect:0.1.2")
     implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
 }
 
 tasks.withType<Test> {
