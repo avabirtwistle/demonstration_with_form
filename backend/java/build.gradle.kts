@@ -18,9 +18,19 @@ dependencies {
     implementation("org.xerial:sqlite-jdbc:3.45.1.0")
     implementation("com.github.gwenn:sqlite-dialect:0.1.2")
     implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+
+testImplementation("org.springframework.boot:spring-boot-starter-test") {
+    exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+    exclude(group = "org.junit.jupiter", module = "junit-jupiter")
 }
+
+testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+testImplementation("org.mockito:mockito-core:5.12.0")
+
+}
+
+
 
 tasks.withType<Test> {
     useJUnitPlatform()

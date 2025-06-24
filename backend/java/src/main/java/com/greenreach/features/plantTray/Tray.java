@@ -2,6 +2,8 @@ package com.greenreach.features.plantTray;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
+import com.greenreach.features.Plants.PlantType;
 import com.greenreach.features.location.model.Slot;
 
 /**
@@ -21,13 +23,15 @@ public class Tray {
      * Unique alphanumeric tray QR suffix (e.g., for LOC-01-01-02-TRAYABC123)
      */
     @Column(name = "tray_qr", nullable = false, unique = true)
-    private String qr;
+    private String code;
 
     /**
      * What plant is growing in the tray (e.g., basil, lettuce)
      */
-    @Column(name = "plant_type", nullable = false)
-    private String plantType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plant_type_id")
+    private PlantType plantType;
+
 
     /**
      * Date the tray was planted (used for scheduling and alerts)
@@ -50,8 +54,8 @@ public class Tray {
 
     protected Tray() {}
 
-    public Tray(String qr, String plantType, LocalDate plantedDate, LocalDate harvestEstimate, Slot slot) {
-        this.qr = qr;
+    public Tray(String code, PlantType plantType, LocalDate plantedDate, LocalDate harvestEstimate, Slot slot) {
+        this.code = code;
         this.plantType = plantType;
         this.plantedDate = plantedDate;
         this.harvestEstimate = harvestEstimate;
@@ -59,31 +63,42 @@ public class Tray {
     }
 
     // Getters
-    public Long getId() { return id; }
-    public String getQr() { return qr; }
-    public String getPlantType() { return plantType; }
-    public LocalDate getPlantedDate() { return plantedDate; }
-    public LocalDate getHarvestEstimate() { return harvestEstimate; }
-    public Slot getSlot() { return slot; }
+    public Long getId() { 
+        return id; 
+    }
+    public String getQr() { 
+        return code; 
+    }
+    public PlantType getPlantType() { 
+        return plantType; 
+    }
+    public LocalDate getPlantedDate() {
+         return plantedDate; 
+        }
+    public LocalDate getHarvestEstimate() { 
+        return harvestEstimate; 
+    }
+    public Slot getSlot() { 
+        return slot;
+     }
 
-    // Builder pattern for clean creation (optional)
     public static TrayBuilder builder() {
         return new TrayBuilder();
     }
 
     public static class TrayBuilder {
-        private String qr;
-        private String plantType;
+        private String code;
+        private PlantType plantType;
         private LocalDate plantedDate;
         private LocalDate harvestEstimate;
         private Slot slot;
 
-        public TrayBuilder qr(String qr) {
-            this.qr = qr;
+        public TrayBuilder code(String code) {
+            this.code = code;
             return this;
         }
 
-        public TrayBuilder plantType(String plantType) {
+        public TrayBuilder plantType(PlantType plantType) {
             this.plantType = plantType;
             return this;
         }
@@ -104,7 +119,7 @@ public class Tray {
         }
 
         public Tray build() {
-            return new Tray(qr, plantType, plantedDate, harvestEstimate, slot);
+            return new Tray(code, plantType, plantedDate, harvestEstimate, slot);
         }
     }
 }

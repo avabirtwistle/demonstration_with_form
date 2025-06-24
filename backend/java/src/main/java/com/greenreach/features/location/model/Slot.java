@@ -1,13 +1,15 @@
 package com.greenreach.features.location.model;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.greenreach.features.plantTray.Tray;
@@ -24,7 +26,7 @@ import com.greenreach.features.plantTray.Tray;
  * @since 2025-06-19
  */
 @Entity
-@Table(name = "slots")
+@Table(name = "slots", indexes = {@Index(name = "idx_slot_code", columnList = "slot_code")})
 public class Slot {
 
     /*
@@ -39,8 +41,8 @@ public class Slot {
      * The litteral alphanumeric string suffic scanned for this slot
      * Ex. LOC-01-01-02-FSDFJ32JKJFS, FSDFJ32JKJFS is the slot_qr
      */
-    @Column(name = "slot_qr", unique = true, nullable = false)
-    private String qr;
+    @Column(name = "slot_code", unique = true, nullable = false)
+    private String code;
 
     /*
      * Status for if the slot is occupied or not: 1 denotes occupied, 0 denotes unoccupied
@@ -49,13 +51,20 @@ public class Slot {
     @Column(name = "slot_occupancy", nullable = false)
     private Integer occupied = 0;
 
+    /**
+     * Mapping for the slot to its level
+     */
+    @ManyToOne
+    @JoinColumn(name = "level_id", nullable = false)
+    private Level level;
+
     @OneToOne(mappedBy = "slot", fetch = FetchType.LAZY)
     private Tray tray;
 
     private Slot(){}
 
-    private Slot(String qr, Integer occupied){
-        this.qr = qr;
+    private Slot(String code, Integer occupied){
+        this.code = code;
     }
 
     public boolean isOccupied() {
@@ -63,13 +72,23 @@ public class Slot {
     }
 
     public String getQR() {
-        return this.qr;
+        return this.code;
+    }
+    public String setQR() {
+        return this.code;
     }
 
     public Long getId(){
         return this.id;
     }
 
+    public Tray getTray(){
+        return this.tray;
+    }
+
+    public void setTray(Tray tray){
+        this.tray = tray;
+    }
     /**
      * Builds and returns a new Slot instance with the configured values.
      *
@@ -80,11 +99,11 @@ public class Slot {
     }
 
     public static class SlotBuilder{
-        private String qr;
+        private String code;
         private Integer occupied;
 
-        public SlotBuilder setQR(String qr){
-            this.qr = qr;
+        public SlotBuilder setQR(String code){
+            this.code = code;
             return this;
         }
         public SlotBuilder setOccupancy(Integer occupied){
@@ -92,7 +111,7 @@ public class Slot {
             return this;
         }
         public Slot build(){
-            return new Slot(qr, occupied);
+            return new Slot(code, occupied);
         }
     }
 
