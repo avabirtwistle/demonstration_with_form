@@ -1,4 +1,4 @@
-package com.greenreach.features.Plants.plantTests;
+package com.greenreach.features.plants.plantTests;
 
 public @interface SpringBootTest {
 

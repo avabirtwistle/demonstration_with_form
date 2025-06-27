@@ -1,4 +1,4 @@
-package com.greenreach.features.Plants;
+package com.greenreach.features.plants;
 
 public enum GrowthStageType {
     GERMINATION,
@@ -7,3 +7,4 @@ public enum GrowthStageType {
     FLOWERING,
     HARVEST
 }
+//TODO Use these in the system for the plant type

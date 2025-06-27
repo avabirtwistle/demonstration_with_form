@@ -11,20 +11,27 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-
-//Because we are extending the JPA repository we have methods such asc
 public interface SlotRepository extends JpaRepository<Slot, Long> {
-    Optional<Slot> findByQr(String code);
-    List<Slot> findByOccupiedFalse();
-    
+    Optional<Slot> findByCode(String code);
+    List<Slot> findByOccupied(Integer occupied); 
+
+    /**
+     * Finds a Slot by its code and the ID of the Level it belongs to.
+     * 
+     * @param levelId the ID of the level containing the slot
+     * @param slotCode the code of the slot which is fully unique.
+     * @return an Optional containing the Slot if found, otherwise empty
+     */
+    Optional<Slot> findByLevel_IdAndCode(Long levelId, String slotCode);
+        
     @Query("""
-    SELECT s FROM Slot s
-    JOIN FETCH s.level l
-    JOIN FETCH l.rack r
-    JOIN FETCH r.zone z
-    JOIN FETCH z.room
-    WHERE s.occupied = false
-""")
-List<Slot> findAllFreeSlots(Pageable pageable);
+        SELECT s FROM Slot s
+        JOIN FETCH s.level l
+        JOIN FETCH l.rack r
+        JOIN FETCH r.zone z
+        JOIN FETCH z.room
+        WHERE s.occupied = 0
+    """)
+    List<Slot> findAllFreeSlots(Pageable pageable); 
 
 }

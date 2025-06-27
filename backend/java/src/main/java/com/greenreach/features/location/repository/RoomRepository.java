@@ -8,5 +8,4 @@ import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
     Optional<Room> findByCode(String code);
-    
 }

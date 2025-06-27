@@ -1,5 +1,8 @@
 package com.greenreach.features.location.model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,6 +30,18 @@ import com.greenreach.features.plantTray.Tray;
  */
 @Entity
 @Table(name = "slots", indexes = {@Index(name = "idx_slot_code", columnList = "slot_code")})
+@AttributeOverrides({
+  // override the inherited `id` field to use room_id
+  @AttributeOverride(
+    name = "id",
+    column = @Column(name = "slot_id", updatable = false, nullable = false)
+  ),
+  // override the inherited `code` field to use room_code
+  @AttributeOverride(
+    name = "code",
+    column = @Column(name = "slot_code", nullable = false, unique = true)
+  )
+})
 public class Slot {
 
     /*
@@ -51,59 +66,89 @@ public class Slot {
     @Column(name = "slot_occupancy", nullable = false)
     private Integer occupied = 0;
 
+    /*
+     * The litteral alphanumeric string suffic scanned for this slot
+     * Ex. LOC-01-01-02-FSDFJ32JKJFS, FSDFJ32JKJFS is the slot_qr
+     */
+    @Column(name = "slot_index", nullable = false)
+    private Integer slotIndex;
+
     /**
      * Mapping for the slot to its level
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
-    @OneToOne(mappedBy = "slot", fetch = FetchType.LAZY)
+    /**
+     * Mapping for the slot to the tray it contains. 
+     */
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "tray_id", referencedColumnName = "tray_id")
     private Tray tray;
 
-    private Slot(){}
 
-    private Slot(String code, Integer occupied){
+    public Slot(){}
+
+    private Slot(Level level, String code, Integer occupied, Integer slotIndex){
         this.code = code;
+        this.occupied = occupied;
     }
 
     public boolean isOccupied() {
         return this.occupied == 1;
     }
 
-    public String getQR() {
-        return this.code;
-    }
-    public String setQR() {
-        return this.code;
-    }
 
     public Long getId(){
         return this.id;
+    }
+    public String getCode(){
+        return this.code;
     }
 
     public Tray getTray(){
         return this.tray;
     }
 
+    public Level getLevel(){
+        return this.level;
+    }
+
     public void setTray(Tray tray){
         this.tray = tray;
+    }
+
+
+    public void slotIndex(Integer slotIndex){
+        this.slotIndex = slotIndex;
     }
     /**
      * Builds and returns a new Slot instance with the configured values.
      *
      * @return SlotBuilder - the constructed Slot object
      */
-    public static SlotBuilder builder() {
-        return new SlotBuilder();
+    public static SlotBuilder builder(Level level) {
+        return new SlotBuilder(level);
     }
 
     public static class SlotBuilder{
         private String code;
         private Integer occupied;
+        private Level level;
+        private Integer slotIndex;
 
-        public SlotBuilder setQR(String code){
+        private SlotBuilder(Level level) {
+            this.level = level;
+        }
+
+        public SlotBuilder setCode(String code){
             this.code = code;
+            return this;
+        }
+
+        public SlotBuilder setSlotIndex(Integer slotIndex){
+            this.slotIndex = slotIndex;
             return this;
         }
         public SlotBuilder setOccupancy(Integer occupied){
@@ -111,8 +156,7 @@ public class Slot {
             return this;
         }
         public Slot build(){
-            return new Slot(code, occupied);
+            return new Slot(level, code, occupied, slotIndex);
         }
     }
-
 }
