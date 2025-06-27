@@ -1,12 +1,16 @@
 package com.greenreach.features.location.service;
 
-import java.util.List;
+import java.time.LocalDate;
+
+import com.greenreach.features.plantTray.TrayStatus;
 
 public record SlotScanResult(
     String code,
-    boolean occupied,
-    String currentStage,
+    LocalDate planDate,
+    String plantName,
+    TrayStatus planStatus,
+    int currentStageIndex,
     int daysUntilHarvest,
-    List<String> remainingStages
+    LocalDate estimatedHarvestDate
 ) {}
 

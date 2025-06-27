@@ -1,5 +1,5 @@
 package com.greenreach.features.location.service;
 
-public class TrayRepository {
+public @interface RequiredArgsConstructor {
 
 }

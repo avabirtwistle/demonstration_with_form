@@ -1,11 +1,14 @@
 package com.greenreach.features.location.service;
+
 import com.greenreach.features.location.model.Rack;
+import com.greenreach.features.location.model.Zone;
 import com.greenreach.features.location.repository.RackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 @Service
 public class RackService {
@@ -17,20 +20,24 @@ public class RackService {
         this.rackRepository = rackRepository;
     }
 
-    public Rack createRack(Rack rack) {
-        return rackRepository.save(rack);
+
+    /**
+     * Looks up a Rack by the rackCode and returns the Rack if it exists otherwise it creates a new Rack.
+     * code in indexed for look ups in the racks table.
+     *
+     * @param code the Rack code derived from the QR code
+     * @param zone the Zone the rack is in
+     * @return the rack with the corresponding code
+     */
+    @Transactional
+    public Rack getOrCreateRack(String code, Zone zone) {
+        Optional<Rack> optionalRack = rackRepository.findByZone_IdAndCode(zone.getId(), code);
+        if (optionalRack.isPresent()) {
+            return optionalRack.get();
+        } else {
+            Rack newRack = Rack.builder(zone).setCode(code).build();
+            return newRack;
+        }
     }
 
-    public Rack getRackOrThrow(String code) {
-        return rackRepository.findByCode(code)
-            .orElseThrow(() -> new RackNotFoundException(code));
-    }
-
-    public Optional<Rack> getRackByCode(String code) {
-        return rackRepository.findByCode(code);
-    }
-
-    public List<Rack> getAllRacks() {
-        return rackRepository.findAll();
-    }
 }

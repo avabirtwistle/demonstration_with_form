@@ -1,7 +1,5 @@
+package com.greenreach.features.plants.model;
 
-package com.greenreach.features.Plants;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,42 +8,50 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-//tells hibernate the class is not an entity on its own but the fields in it should be inherited and mapped into the database columns of subclasses
-//not stored as a seperate table but acs like a template
+
+import com.greenreach.features.plants.GrowthStageType;
 
 @Entity
-@Table(name = "category_growth_stage")
-public class CategoryGrowthStage {
+@Table(
+    name = "growth_stage",
+    indexes = {
+      @Index(name = "idx_growth_stage_order", columnList = "order_index"),
+      @Index(name = "idx_growth_stage_plantable_order", columnList = "plantable_id,order_index")
+    }
+)
+public class PlantableGrowthStage {
 
-    @Id 
+    /** Number of times this plant can be harvested before replacement */
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_stage_id")
     private Long id;
 
+    /** Number of times this plant can be harvested before replacement */
     @Enumerated(EnumType.STRING)
     @Column(name = "stage")
     private GrowthStageType stageName;
 
+    /** The duration in days the plant is in this growth stage for */
     @Column(name = "duration")
     private int durationDays;
 
+    /** The index number the represents what stage the plant is in. Used for ordering the growth stages */
     @Column(name = "order_index")
     private int orderIndex;
 
+    /** The Plantable (plant category, subcategory or type) that this growth stage belongs to */
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "plantable_id", nullable = false)
+    private Plantable plantable;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", nullable = false)
-    private PlantCategory category;
 
-    public Long getId() {
+     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public GrowthStageType getStageName() {
@@ -72,12 +78,11 @@ public class CategoryGrowthStage {
         this.orderIndex = orderIndex;
     }
 
-    public PlantCategory getCategory() {
-        return category;
+    public Plantable getPlantable() {
+        return plantable;
     }
 
-    public void setCategory(PlantCategory category) {
-        this.category = category;
+    public void setPlantable(Plantable plantable) {
+        this.plantable = plantable;
     }
 }
-

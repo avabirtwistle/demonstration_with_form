@@ -43,7 +43,7 @@ public class Zone {
     /**
      * The zone to which this rack belongs.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
@@ -71,14 +71,17 @@ public class Zone {
      *
      * @return a new instance of ZoneBuilder
      */
-    public static ZoneBuilder builder() {
-        return new ZoneBuilder();
+    public static ZoneBuilder builder(Room room) {
+        return new ZoneBuilder(room);
     }
 
     public static class ZoneBuilder {
         private String code;
         private Room room;
 
+        private ZoneBuilder(Room room){
+            this.room = room;
+        }
         public ZoneBuilder setCode(String code) {
             this.code = code;
             return this;
