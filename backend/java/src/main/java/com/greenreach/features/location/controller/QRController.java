@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.greenreach.features.location.service.SlotRegisterService;
+import com.greenreach.features.location.service.SlotScanResult;
+import com.greenreach.features.location.service.SlotScanService;
 import com.greenreach.features.location.components.*;
 import com.greenreach.features.location.model.Slot;
+
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +22,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping(path = "/scan")
 public class QRController {
 
-    private final LocationQrCodeProcessor qrCodeProcessor;
-    private final SlotRegisterService slotRegisterService;
+  private final LocationQrCodeProcessor qrCodeProcessor;
+  private final SlotRegisterService     slotRegisterService;
+  private final SlotScanService         slotScanService;
 
-    public QRController(LocationQrCodeProcessor qrCodeProcessor, SlotRegisterService slotRegisterService) {
-        this.qrCodeProcessor = qrCodeProcessor;
-        this.slotRegisterService = slotRegisterService;
-    }
+  public QRController(LocationQrCodeProcessor qrCodeProcessor,
+                      SlotRegisterService     slotRegisterService,
+                      SlotScanService         slotScanService)
+  {
+    this.qrCodeProcessor    = qrCodeProcessor;
+    this.slotRegisterService = slotRegisterService;
+    this.slotScanService    = slotScanService;
+  }
 @GetMapping("/location")
   public ResponseEntity<SlotResponse> processQr(@RequestParam String code) {
     var parsed = qrCodeProcessor.parse(code);
@@ -43,17 +52,49 @@ public class QRController {
     String rackCode  = slot.getLevel().getRack().getCode();
     String levelCode = slot.getLevel().getCode();
 
-    var response = new SlotResponse(
-      slot.getId(),
-      slot.getCode(),
-      slot.getSlotIndex(),
-      roomCode,
-      zoneCode,
-      rackCode,
-      levelCode
-    );
+    SlotResponse resp;
 
-    return ResponseEntity.ok(response);
+    if(!slot.isOccupied()){
+        resp = new SlotResponse(
+        slot.getId(),
+        slot.getCode(),
+        slot.getSlotIndex(),
+        parsed.roomCode(),
+        parsed.zoneCode(),
+        parsed.rackCode(),
+        parsed.levelCode(),
+        false,      // occupied?
+        null,       // plantTypeName
+        null,       // plantedDate
+        null,       // status
+        null,       // currentStageIndex
+        null,       // daysToHarvest
+        null        // harvestEstimate
+      );
+    }else {
+      // occupied!
+          // 2) try to scan it
+    SlotScanResult s =
+      slotScanService.getSlotScanResult(parsed.qrSuffix());
+      resp = new SlotResponse(
+        slot.getId(),
+        slot.getCode(),
+        slot.getSlotIndex(),
+        parsed.roomCode(),
+        parsed.zoneCode(),
+        parsed.rackCode(),
+        parsed.levelCode(),
+        true,                        // occupied
+        s.plantName(),        // plant type
+        s.plantDate(),          // plantedDate
+        s.plantStatus(),               // status
+        s.currentStageIndex(),    // stage index
+        s.daysUntilHarvest(),        // days left
+        s.estimatedHarvestDate()       // estimate
+      );
+    }
+
+    return ResponseEntity.ok(resp);
   }
 
 

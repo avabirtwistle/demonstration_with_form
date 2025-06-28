@@ -6,9 +6,9 @@ import com.greenreach.features.plantTray.TrayStatus;
 
 public record SlotScanResult(
     String code,
-    LocalDate planDate,
+    LocalDate plantDate,
     String plantName,
-    TrayStatus planStatus,
+    TrayStatus plantStatus,
     int currentStageIndex,
     int daysUntilHarvest,
     LocalDate estimatedHarvestDate
