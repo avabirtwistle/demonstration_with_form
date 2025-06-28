@@ -14,5 +14,5 @@ public interface ZoneRepository extends JpaRepository<Zone, Long> {
      * @param levelCode the code of the level which is unique to this specific rack
      * @return an Optional containing the Level if found, otherwise empty
      */
-    Optional<Zone> findByRoom_IdAndCode(Long roomId, String zoneCode);
+    Optional<Zone> findByRoomIdAndCode(Long roomId, String zoneCode);
 }

@@ -30,4 +30,6 @@ public class SlotController {
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    
 }

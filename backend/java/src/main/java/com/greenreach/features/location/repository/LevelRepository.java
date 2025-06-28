@@ -23,6 +23,6 @@ public interface LevelRepository extends JpaRepository<Level, Long> {
      * @param levelCode the code of the level which is unique to this specific rack
      * @return an Optional containing the Level if found, otherwise empty
      */
-    Optional<Level> findByRack_IdAndCode(Long rackId, String levelCode);
+    Optional<Level> findByRackIdAndCode(Long rackId, String levelCode);
 }
 

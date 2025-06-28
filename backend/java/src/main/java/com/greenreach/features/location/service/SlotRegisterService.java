@@ -35,7 +35,7 @@ public class SlotRegisterService {
     }
 
     public Slot getOrCreateSlot(String roomCode, String zoneCode, String rackCode, String levelCode, Integer slotIndex, String qr) {
-        Room room = roomService.getOrCreateRoom(roomCode);
+        Room room = roomService.getOrCreateRoom(roomCode); 
         Zone zone = zoneService.getOrCreateZone(zoneCode, room);
         Rack rack = rackService.getOrCreateRack(rackCode, zone);
         Level level = levelService.getOrCreateLevel(levelCode, rack);

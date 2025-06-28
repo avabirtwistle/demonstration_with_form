@@ -31,12 +31,12 @@ public class RackService {
      */
     @Transactional
     public Rack getOrCreateRack(String code, Zone zone) {
-        Optional<Rack> optionalRack = rackRepository.findByZone_IdAndCode(zone.getId(), code);
+        Optional<Rack> optionalRack = rackRepository.findByZoneIdAndCode(zone.getId(), code);
         if (optionalRack.isPresent()) {
             return optionalRack.get();
         } else {
             Rack newRack = Rack.builder(zone).setCode(code).build();
-            return newRack;
+            return rackRepository.save(newRack);
         }
     }
 

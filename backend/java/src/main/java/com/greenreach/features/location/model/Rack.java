@@ -47,14 +47,14 @@ public class Rack {
      * Number of vertical levels (shelves) in the rack.
      */
     @Column(nullable = false)
-    private Integer numLevels;
+    private Integer numLevels = 0;
 
     /**
      * Number of slots remaining on this rack. Derived from the number of availble slots vs occupied ones
      * in the levels list.
      */
     @Column(nullable = false)
-    private Integer spotsRemaining;
+    private Integer spotsRemaining = 0;
 
     /**
     * The zone this rack belongs to.
@@ -101,7 +101,7 @@ public class Rack {
      */
     public static class RackBuilder {
         private String code;
-        private Integer numLevels;
+        private Integer numLevels = 0;
         private Zone zone;
         
         private RackBuilder(Zone zone){

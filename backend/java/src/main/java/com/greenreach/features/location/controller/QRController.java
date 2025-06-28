@@ -1,17 +1,18 @@
 package com.greenreach.features.location.controller;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.greenreach.features.location.service.SlotRegisterService;
 import com.greenreach.features.location.components.*;
+import com.greenreach.features.location.model.Slot;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.greenreach.features.location.model.Slot;
 
 @RestController
 @RequestMapping(path = "/scan")
@@ -24,23 +25,37 @@ public class QRController {
         this.qrCodeProcessor = qrCodeProcessor;
         this.slotRegisterService = slotRegisterService;
     }
+@GetMapping("/location")
+  public ResponseEntity<SlotResponse> processQr(@RequestParam String code) {
+    var parsed = qrCodeProcessor.parse(code);
+    Slot slot = slotRegisterService.getOrCreateSlot(
+      parsed.roomCode(),
+      parsed.zoneCode(),
+      parsed.rackCode(),
+      parsed.levelCode(),
+      parsed.slotIndex(),
+      parsed.qrSuffix()
+    );
 
-    @GetMapping("/location")
-    public ResponseEntity<?> processQr(@RequestParam String code) {
-        // Parse the code
-        LocationQrCodeProcessor.ParsedQr parsed = qrCodeProcessor.parse(code);
+    // Walk the object graph to pull out each code
+    String roomCode  = slot.getLevel().getRack().getZone().getRoom().getCode();
+    String zoneCode  = slot.getLevel().getRack().getZone().getCode();
+    String rackCode  = slot.getLevel().getRack().getCode();
+    String levelCode = slot.getLevel().getCode();
 
-        //Get or create the slot with the proper 
-        Slot slot = slotRegisterService.getOrCreateSlot(
-            parsed.roomCode(),
-            parsed.zoneCode(),
-            parsed.rackCode(),
-            parsed.levelCode(),     
-            parsed.slotIndex(),
-            parsed.qrSuffix() //the unique qr code string
-        );
-        return ResponseEntity.ok("Slot ID: " + slot.getId());
-    }
+    var response = new SlotResponse(
+      slot.getId(),
+      slot.getCode(),
+      slot.getSlotIndex(),
+      roomCode,
+      zoneCode,
+      rackCode,
+      levelCode
+    );
+
+    return ResponseEntity.ok(response);
+  }
+
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleBadQr(IllegalArgumentException ex) {
@@ -57,4 +72,3 @@ public class QRController {
                  .body("Internal error: " + ex.getMessage());
     }
 }
-

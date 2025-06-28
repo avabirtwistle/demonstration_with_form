@@ -22,7 +22,7 @@ public interface SlotRepository extends JpaRepository<Slot, Long> {
      * @param slotCode the code of the slot which is fully unique.
      * @return an Optional containing the Slot if found, otherwise empty
      */
-    Optional<Slot> findByLevel_IdAndCode(Long levelId, String slotCode);
+    Optional<Slot> findByLevelIdAndCode(Long levelId, String slotCode);
         
     @Query("""
         SELECT s FROM Slot s

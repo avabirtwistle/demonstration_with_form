@@ -56,12 +56,12 @@ public class SlotService {
      */
     @Transactional
     public Slot getOrCreateSlot(String code, Integer slotIndex, Level level) {
-        Optional<Slot> optionalSlot = slotRepository.findByLevel_IdAndCode(level.getId(), code);
+        Optional<Slot> optionalSlot = slotRepository.findByLevelIdAndCode(level.getId(), code);
         if (optionalSlot.isPresent()) {
             return optionalSlot.get();
         } else {
             Slot newSlot = Slot.builder(level).setCode(code).setSlotIndex(slotIndex).build();
-            newSlot.getLevel().incrementSlots();
+            level.incrementSlots();
             return slotRepository.save(newSlot);
         }
     }

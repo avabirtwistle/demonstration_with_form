@@ -30,7 +30,7 @@ public class ZoneService {
      */
     @Transactional
     public Zone getOrCreateZone(String code, Room room) {
-        Optional<Zone> optionalZone = zoneRepository.findByRoom_IdAndCode(room.getId(), code);
+        Optional<Zone> optionalZone = zoneRepository.findByRoomIdAndCode(room.getId(), code);
         if (optionalZone.isPresent()) {
             return optionalZone.get();
         } else {

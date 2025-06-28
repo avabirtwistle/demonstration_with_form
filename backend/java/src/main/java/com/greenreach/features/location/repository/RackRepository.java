@@ -14,5 +14,5 @@ public interface RackRepository extends JpaRepository<Rack, Long> {
      * @param code the code of the rack which is unique inside this specific room
      * @return an Optional containing the Rack if found, otherwise empty
      */
-    Optional<Rack> findByZone_IdAndCode(Long zoneId, String rackCode);
+    Optional<Rack> findByZoneIdAndCode(Long zoneId, String rackCode);
 }

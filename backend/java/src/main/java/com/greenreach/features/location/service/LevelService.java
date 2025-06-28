@@ -39,13 +39,13 @@ public class LevelService {
      */
     @Transactional
     public Level getOrCreateLevel(String code, Rack rack) {
-        Optional<Level> optionalLevel = levelRepository.findByRack_IdAndCode(rack.getId(), code);
+        Optional<Level> optionalLevel = levelRepository.findByRackIdAndCode(rack.getId(), code);
         if (optionalLevel.isPresent()) {
             return optionalLevel.get();
         } else {
             //Create a new level on this rack with the level code and increment num of levels
             Level newLevel = Level.builder(rack).setCode(code).build();
-            newLevel.getRack().incrementLevels();
+            rack.incrementLevels();
 
             //Save to the repository and return the level
             return levelRepository.save(newLevel);

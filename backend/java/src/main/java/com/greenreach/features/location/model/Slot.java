@@ -90,9 +90,10 @@ public class Slot {
 
     public Slot(){}
 
-    private Slot(Level level, String code, Integer occupied, Integer slotIndex){
+    private Slot(Level level, String code, Integer slotIndex){
         this.code = code;
-        this.occupied = occupied;
+        this.level = level;
+        this.slotIndex = slotIndex;
     }
 
     public boolean isOccupied() {
@@ -114,6 +115,9 @@ public class Slot {
     public Level getLevel(){
         return this.level;
     }
+    public Integer getSlotIndex(){
+        return this.slotIndex;
+    }
 
     public void setTray(Tray tray){
         this.tray = tray;
@@ -134,13 +138,13 @@ public class Slot {
 
     public static class SlotBuilder{
         private String code;
-        private Integer occupied;
         private Level level;
         private Integer slotIndex;
 
         private SlotBuilder(Level level) {
             this.level = level;
         }
+
 
         public SlotBuilder setCode(String code){
             this.code = code;
@@ -151,12 +155,9 @@ public class Slot {
             this.slotIndex = slotIndex;
             return this;
         }
-        public SlotBuilder setOccupancy(Integer occupied){
-            this.occupied = occupied;
-            return this;
-        }
+
         public Slot build(){
-            return new Slot(level, code, occupied, slotIndex);
+            return new Slot(level, code, slotIndex);
         }
     }
 }

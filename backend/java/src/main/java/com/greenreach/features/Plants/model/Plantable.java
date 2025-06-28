@@ -37,18 +37,13 @@ public abstract class Plantable {
     @Column(name = "harvest_cycles", nullable = false)
     private Integer cycles = 1;
 
-    /** All growth stages for this item */
-    @OneToMany(mappedBy = "plantable", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlantableGrowthStage> stages = new ArrayList<>();
-
     /** Protected constructor for JPA */
     protected Plantable() {}
 
     /** Constructs a Plantable with name and cycle count; initial stages added via addStage(). */
-    protected Plantable(String name, Integer cycles, List<PlantableGrowthStage> stages ) {
+    protected Plantable(String name, Integer cycles) {
         this.name = name;
         this.cycles = cycles;
-        this.stages = stages;
     }
 
     /* Getters and setters */
@@ -68,37 +63,6 @@ public abstract class Plantable {
         this.cycles = cycles;
     }
 
-    /**
-     * Returns an unmodifiable list of growth stages.
-     */
-    public List<PlantableGrowthStage> getStages() {
-        return Collections.unmodifiableList(stages);
-    }
 
-    /**
-     * Adds a stage, setting the back-reference.
-     */
-    public void addStage(PlantableGrowthStage stage) {
-        stage.setPlantable(this);
-        stages.add(stage);
-    }
 
-    /**
-     * Removes a stage, clearing the back-reference.
-     */
-    public void removeStage(PlantableGrowthStage stage) {
-        stages.remove(stage);
-        stage.setPlantable(null);
-    }
-
-    /**
-     * Returns the total number of days 
-     */
-    public int getTotalDays(){
-        int totalDays = 0;
-        for(PlantableGrowthStage growthStage : stages){
-            totalDays += growthStage.getDurationDays();
-        }
-        return totalDays;
-    }
 }

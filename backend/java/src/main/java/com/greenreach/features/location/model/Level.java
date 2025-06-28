@@ -65,7 +65,7 @@ public class Level extends Locatable {
     }
 
     public static LevelBuilder builder(Rack rack) {
-        return new LevelBuilder();
+        return new LevelBuilder().setRack(rack);
     }
 
     public static class LevelBuilder {
@@ -104,7 +104,7 @@ public class Level extends Locatable {
     }
 
     public void incrementSlots() {
-        numSlots++;
+        numSlots = numSlots +1;
     }
 
 }

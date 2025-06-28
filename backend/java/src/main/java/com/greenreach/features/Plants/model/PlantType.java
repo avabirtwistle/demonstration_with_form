@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 /**
  * Represents a specific plant variety (e.g., Buttercrunch Lettuce) under a subcategory.
- * Inherits common fields from Plantable and overrides column mappings.
  */
 @Entity
 @Table(name = "plant_type")
@@ -42,38 +41,52 @@ public class PlantType extends Plantable {
     }
 
     /**
-     * Constructs a PlantType with a name and parent subcategory. Auto-populates the subcategory and cycles fields with the parents.
+     * Constructs a PlantType with a name and parent subcategory.
+     * Copies cycles and growth stages from the subcategory.
      */
     public PlantType(String name, PlantSubCategory subCategory) {
-        super(name, subCategory.getCycles(), subCategory.getGrowthStages());
+        super(name, subCategory.getCycles());
         this.subCategory = subCategory;
+        this.growthStages.addAll(subCategory.getGrowthStages());
+        for (PlantableGrowthStage stage : this.growthStages) {
+            stage.setPlantable(this);
+        }
     }
 
     /**
-     * Constructs a PlantType with full details including stages.
+     * Constructs a PlantType with full details including custom stages.
      */
     public PlantType(String name, Integer cycles, PlantSubCategory subCategory, List<PlantableGrowthStage> growthStages) {
-        super(name, cycles, growthStages);
+        super(name, cycles);
         this.subCategory = subCategory;
+        this.growthStages.addAll(growthStages);
+        for (PlantableGrowthStage stage : this.growthStages) {
+            stage.setPlantable(this);
+        }
     }
 
     /** Adds a growth stage and sets its back-reference. */
-    @Override
     public void addStage(PlantableGrowthStage stage) {
         stage.setPlantable(this);
         growthStages.add(stage);
     }
 
     /** Removes a growth stage and clears its back-reference. */
-    @Override
     public void removeStage(PlantableGrowthStage stage) {
-        stage.setPlantable(null);
         growthStages.remove(stage);
+        stage.setPlantable(null);
     }
 
     /** Returns an unmodifiable list of growth stages. */
     public List<PlantableGrowthStage> getGrowthStages() {
         return List.copyOf(growthStages);
+    }
+
+    /** Returns total duration of all growth stages. */
+    public int getTotalDays() {
+        return growthStages.stream()
+            .mapToInt(PlantableGrowthStage::getDurationDays)
+            .sum();
     }
 
     /** Gets the parent subcategory. */
