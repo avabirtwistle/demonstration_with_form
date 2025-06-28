@@ -1,10 +1,18 @@
 package com.greenreach.features.location.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,7 +26,7 @@ import javax.persistence.Table;
  * @since 2025-06-19
  */
 @Entity
-@Table(name = "racks")
+@Table(name = "racks", indexes = {@Index(name = "idx_rack_code", columnList = "rack_code")})
 public class Rack {
 
     /**
@@ -39,7 +47,28 @@ public class Rack {
      * Number of vertical levels (shelves) in the rack.
      */
     @Column(nullable = false)
-    private Integer num_levels;
+    private Integer numLevels = 0;
+
+    /**
+     * Number of slots remaining on this rack. Derived from the number of availble slots vs occupied ones
+     * in the levels list.
+     */
+    @Column(nullable = false)
+    private Integer spotsRemaining = 0;
+
+    /**
+    * The zone this rack belongs to.
+    */
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "zone_id", nullable = false)
+    private Zone zone;
+
+
+    /**
+     * The levels which are on this rack
+     */
+    @OneToMany(mappedBy = "rack", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Level> levels; 
 
     /**
      * Default constructor required by JPA.
@@ -52,34 +81,39 @@ public class Rack {
      * @param code the unique rack code
      * @param num_levels the number of levels in the rack
      */
-    private Rack(String code, Integer num_levels){
+    private Rack(Zone zone, String code, Integer numLevels){
+        this.zone = zone;
         this.code = code;
-        this.num_levels = num_levels;
+        this.numLevels = numLevels;
     }
 
     /**
-     * Builds and returns a new {@code Rack} instance with the configured values.
+     * Builds and returns a new Rack instance with the configured values.
      *
-     * @return the constructed {@code Rack} object
+     * @return the constructed Rack object
      */
-    public static RackBuilder builder(){
-        return new RackBuilder();
+    public static RackBuilder builder(Zone zone){
+        return new RackBuilder(zone);
     }
 
     /**
-     * Builder class for constructing {@code Rack} instances using a fluent API.
+     * Builder class for constructing Rack instances.
      */
-    public static class RackBuilder{
+    public static class RackBuilder {
         private String code;
-        private Integer num_levels;
+        private Integer numLevels = 0;
+        private Zone zone;
         
+        private RackBuilder(Zone zone){
+            this.zone = zone;
+        }
         /**
          * Sets the rack code.
          *
          * @param code the unique identifier for the rack
-         * @return the current {@code RackBuilder} instance
+         * @return the current RackBuilder instance
          */
-        public RackBuilder setRackCode(final String code){
+        public RackBuilder setCode(final String code){
             this.code = code;
             return this;
         }
@@ -87,21 +121,51 @@ public class Rack {
         /**
          * Sets the number of levels in the rack.
          *
-         * @param num_levels the number of vertical levels
-         * @return the current {@code RackBuilder} instance
+         * @param numLevels the number of vertical levels
+         * @return the current RackBuilder instance
          */
-        public RackBuilder setNumLevels(final Integer num_levels){
-            this.num_levels = num_levels;
+        public RackBuilder setNumLevels(final Integer numLevels){
+            this.numLevels = numLevels;
             return this;
         }
 
          /**
-         * Builds and returns a new {@code Rack} instance.
+         * Builds and returns a new Rack instance.
          *
-         * @return a new {@code Rack} with the configured properties
+         * @return a new Rack with the configured properties
          */
         public Rack build() {
-            return new Rack(code, num_levels);
+            return new Rack(zone, code, numLevels);
         }
+    }
+    public String getCode() {
+    return code;
+    }
+
+    public Integer getNumLevels() {
+        return numLevels;
+    }
+
+    public Integer getSpotsRemaining() {
+        return spotsRemaining;//TODO: Possibly need to itterate through the levels and might want to invoke on case by case basis
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
+    }
+
+    public List<Level> getLevels() {
+        return levels;
+    }
+    public void incrementLevels() {
+        this.numLevels += 1;
     }
 }

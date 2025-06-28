@@ -1,13 +1,18 @@
 package com.greenreach.features.location.model;
 
-import javax.annotation.Generated;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.greenreach.features.plantTray.Tray;
@@ -24,7 +29,19 @@ import com.greenreach.features.plantTray.Tray;
  * @since 2025-06-19
  */
 @Entity
-@Table(name = "slots")
+@Table(name = "slots", indexes = {@Index(name = "idx_slot_code", columnList = "slot_code")})
+@AttributeOverrides({
+  // override the inherited `id` field to use room_id
+  @AttributeOverride(
+    name = "id",
+    column = @Column(name = "slot_id", updatable = false, nullable = false)
+  ),
+  // override the inherited `code` field to use room_code
+  @AttributeOverride(
+    name = "code",
+    column = @Column(name = "slot_code", nullable = false, unique = true)
+  )
+})
 public class Slot {
 
     /*
@@ -39,8 +56,8 @@ public class Slot {
      * The litteral alphanumeric string suffic scanned for this slot
      * Ex. LOC-01-01-02-FSDFJ32JKJFS, FSDFJ32JKJFS is the slot_qr
      */
-    @Column(name = "slot_qr", unique = true, nullable = false)
-    private String qr;
+    @Column(name = "slot_code", unique = true, nullable = false)
+    private String code;
 
     /*
      * Status for if the slot is occupied or not: 1 denotes occupied, 0 denotes unoccupied
@@ -49,51 +66,98 @@ public class Slot {
     @Column(name = "slot_occupancy", nullable = false)
     private Integer occupied = 0;
 
-    @OneToOne(mappedBy = "slot", fetch = FetchType.LAZY)
+    /*
+     * The litteral alphanumeric string suffic scanned for this slot
+     * Ex. LOC-01-01-02-FSDFJ32JKJFS, FSDFJ32JKJFS is the slot_qr
+     */
+    @Column(name = "slot_index", nullable = false)
+    private Integer slotIndex;
+
+    /**
+     * Mapping for the slot to its level
+     */
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "level_id", nullable = false)
+    private Level level;
+
+    /**
+     * Mapping for the slot to the tray it contains. 
+     */
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "tray_id", referencedColumnName = "tray_id")
     private Tray tray;
 
-    private Slot(){}
 
-    private Slot(String qr, Integer occupied){
-        this.qr = qr;
+    public Slot(){}
+
+    private Slot(Level level, String code, Integer slotIndex){
+        this.code = code;
+        this.level = level;
+        this.slotIndex = slotIndex;
     }
 
     public boolean isOccupied() {
         return this.occupied == 1;
     }
 
-    public String getQR() {
-        return this.qr;
-    }
 
     public Long getId(){
         return this.id;
     }
+    public String getCode(){
+        return this.code;
+    }
 
+    public Tray getTray(){
+        return this.tray;
+    }
+
+    public Level getLevel(){
+        return this.level;
+    }
+    public Integer getSlotIndex(){
+        return this.slotIndex;
+    }
+
+    public void setTray(Tray tray){
+        this.tray = tray;
+    }
+
+
+    public void slotIndex(Integer slotIndex){
+        this.slotIndex = slotIndex;
+    }
     /**
      * Builds and returns a new Slot instance with the configured values.
      *
      * @return SlotBuilder - the constructed Slot object
      */
-    public static SlotBuilder builder() {
-        return new SlotBuilder();
+    public static SlotBuilder builder(Level level) {
+        return new SlotBuilder(level);
     }
 
     public static class SlotBuilder{
-        private String qr;
-        private Integer occupied;
+        private String code;
+        private Level level;
+        private Integer slotIndex;
 
-        public SlotBuilder setQR(String qr){
-            this.qr = qr;
+        private SlotBuilder(Level level) {
+            this.level = level;
+        }
+
+
+        public SlotBuilder setCode(String code){
+            this.code = code;
             return this;
         }
-        public SlotBuilder setOccupancy(Integer occupied){
-            this.occupied = occupied;
+
+        public SlotBuilder setSlotIndex(Integer slotIndex){
+            this.slotIndex = slotIndex;
             return this;
         }
+
         public Slot build(){
-            return new Slot(qr, occupied);
+            return new Slot(level, code, slotIndex);
         }
     }
-
 }
