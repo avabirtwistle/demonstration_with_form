@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/webhook")
-public class SwitchBotWebHookController {
+public class SwitchBotWebhookController {
 
     private static final Logger log = LoggerFactory.getLogger(SwitchBotWebhookController.class);
 
